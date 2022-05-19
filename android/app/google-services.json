@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "330620291849",
+    "project_id": "hospital-management-flut-2ab29",
+    "storage_bucket": "hospital-management-flut-2ab29.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:330620291849:android:9d564e45bff49b8cf521d8",
+        "android_client_info": {
+          "package_name": "com.example.my_hospital_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "330620291849-vg7tg4hq255pkiru5d2tf4865maf2ubd.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA0HKl7gU8AKcTErxQqu69jQQeJLp9Nklc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "330620291849-vg7tg4hq255pkiru5d2tf4865maf2ubd.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
