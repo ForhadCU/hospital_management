@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:my_hospital_app/controller/services/service.my_service.dart';
 import 'package:my_hospital_app/model/consts/keywords.dart';
+import 'package:my_hospital_app/model/data_model/model.doctors.dart';
 
 class ServicesFirestore {
   static final CollectionReference collRefUser =
@@ -16,6 +17,49 @@ class ServicesFirestore {
       FirebaseFirestore.instance.collection(ConstKeys.nurseCollRef);
   /*  static final DocumentReference adminDocRef =
       ServicesFirestore.collRefAdmin.doc(); */
+
+  static Future<List<Doctor>> mReadSpecialDoctors(String catName) async {
+    final FirebaseFirestore db = FirebaseFirestore.instance;
+    List<Doctor> specialDoctorModelList = [];
+
+    QuerySnapshot<Map<String, dynamic>> querySnapshot =
+        await db.collection(ConstKeys.doctorCollRef).get();
+
+    List<Doctor> doctorModelList =
+        querySnapshot.docs.map((e) => Doctor.fromMap(e.data())).toList();
+
+    for (var i = 0; i < doctorModelList.length; i++) {
+      Doctor doctor = doctorModelList[i];
+      if (doctor.category == catName) {
+        specialDoctorModelList.add(Doctor(
+            userid: doctor.userid,
+            name: doctor.name,
+            category: doctor.category,
+            rating: doctor.rating,
+            email: doctor.email,
+            schedule_start: doctor.schedule_start,
+            schedule_end: doctor.schedule_end));
+      }
+    }
+    return specialDoctorModelList;
+  }
+
+  static Future<List<Doctor>> mReadAllDoctors() async {
+    final FirebaseFirestore _db = FirebaseFirestore.instance;
+
+    QuerySnapshot<Map<String, dynamic>> snapshot =
+        await _db.collection(ConstKeys.doctorCollRef).get();
+    List<Doctor> doctorModelList = snapshot.docs
+        .map((docSnapshot) => Doctor.fromMap(docSnapshot.data()))
+        .toList();
+
+    //get one by one
+    /* for (var i = 0; i < doctorModelList.length; i++) {
+      Doctors model = doctorModelList[i];
+      print(model.name);
+    } */
+    return doctorModelList;
+  }
 
   static Future<String?> mCheckUserType(String userId) async {
     //checking for Admin
