@@ -9,7 +9,6 @@ import 'package:my_hospital_app/model/consts/const.colors.dart';
 import 'package:my_hospital_app/model/consts/const.data.bn.dart';
 import 'package:my_hospital_app/view/screens/pragnency/shagotom/widgets/wdgt.lebeltext.dart';
 
-
 class ShaptahikPoriborton extends StatefulWidget {
   final int runningDays;
   final int runningWeeks;
@@ -78,7 +77,7 @@ class _ShaptahikPoribortonState extends State<ShaptahikPoriborton> {
                       //title
                       CustomText(
                         text: MaaData.weekly_change,
-                        fontcolor: MyColors.demo1,
+                        fontcolor: MyColors.c2,
                         fontWeight: FontWeight.w600,
                         fontsize: 20,
                       ),
@@ -108,7 +107,7 @@ class _ShaptahikPoribortonState extends State<ShaptahikPoriborton> {
                       // final player = AudioCache();
                       if (!isPlaying) {
                         // player.play('lib/assets/images/tone_1.mp3');
-                /*         await audioPlayer.play('lib/assets/images/tone_1.mp3',
+                        /*         await audioPlayer.play('lib/assets/images/tone_1.mp3',
                             isLocal: true); */
 
                         isPlaying = true;
@@ -139,7 +138,7 @@ class _ShaptahikPoribortonState extends State<ShaptahikPoriborton> {
 
           //image
           Container(
-            color: MyColors.pink2,
+            color: MyColors.c4,
             height: MyScreenSize.mGetHeight(context, 36),
             child: Stack(children: [
               Positioned(

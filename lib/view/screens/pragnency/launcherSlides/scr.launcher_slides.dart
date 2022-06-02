@@ -53,12 +53,12 @@ class _LauncherSlidesScreenState extends State<LauncherSlidesScreen> {
       // appBar: AppBar(systemOverlayStyle: SystemUiOverlayStyle()),
       body: Container(
         decoration: const BoxDecoration(
-          color: MyColors.demo1,
+          color: MyColors.c2,
         ),
         child: Scaffold(
             backgroundColor: Colors.white,
             body: Container(
-              color: MyColors.demo1,
+              color: MyColors.c2,
               // height: MediaQuery.of(context).size.height - 100,
               height: MediaQuery.of(context).size.height,
               child: PageView(
@@ -79,7 +79,7 @@ class _LauncherSlidesScreenState extends State<LauncherSlidesScreen> {
             ),
             bottomSheet: /* slideIndex != 3 ? */
                 Container(
-              color: MyColors.demo1,
+              color: MyColors.c2,
 
               // margin: EdgeInsets.symmetric(vertical: 16),
               child: Column(
@@ -96,7 +96,7 @@ class _LauncherSlidesScreenState extends State<LauncherSlidesScreen> {
                               },
                               style: ElevatedButton.styleFrom(
                                 elevation: 0,
-                                primary: MyColors.demo1,
+                                primary: MyColors.c2,
                               ),
                               child: const Text(
                                 "",
@@ -113,9 +113,9 @@ class _LauncherSlidesScreenState extends State<LauncherSlidesScreen> {
                               },
                               style: ElevatedButton.styleFrom(
                                 elevation: 0,
-                                primary: MyColors.demo1,
+                                primary: MyColors.c2,
                               ),
-                              child:  Text(
+                              child: Text(
                                 MaaData.previous,
                                 style: TextStyle(
                                     color: MyColors.textOnPrimary,
@@ -143,7 +143,7 @@ class _LauncherSlidesScreenState extends State<LauncherSlidesScreen> {
                                   curve: Curves.linear);
                         },
                         style: ElevatedButton.styleFrom(
-                            elevation: 0, primary: MyColors.demo1),
+                            elevation: 0, primary: MyColors.c2),
                         child: Text(
                           slideIndex == 3 ? MaaData.save : MaaData.next,
                           style: const TextStyle(

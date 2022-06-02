@@ -4,9 +4,11 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:my_hospital_app/controller/firebaseController/services.firestore.dart';
+import 'package:my_hospital_app/controller/utils/util.custom_statusbar.dart';
 import 'package:my_hospital_app/controller/utils/util.custom_text.dart';
 import 'package:my_hospital_app/controller/utils/util.my_scr_size.dart';
 import 'package:my_hospital_app/model/consts/const.colors.dart';
+import 'package:my_hospital_app/view/screens/addAppointments/scr.add_appointments.dart';
 import 'package:my_hospital_app/view/screens/adminHome/screen/appointment/scr.appointment.dart';
 import 'package:my_hospital_app/view/screens/login/scr.login.dart';
 import 'package:my_hospital_app/view/screens/patientHome/widgets/iconButtons.dart';
@@ -25,10 +27,7 @@ class _PatientHomeState extends State<PatientHome> {
   @override
   void initState() {
     super.initState();
-    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-        statusBarBrightness: Brightness.light,
-        statusBarIconBrightness: Brightness.dark,
-        statusBarColor: Colors.white));
+    CustomStatusBar.mGetWhiteStatusbar();
     mAuth = FirebaseAuth.instance;
   }
 
@@ -120,9 +119,13 @@ class _PatientHomeState extends State<PatientHome> {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   Expanded(
-                    child: IconAndText.iconAndText(
-                        imageUrl: 'lib/assets/ic_add_appointment.png',
-                        title: "Add Appointment"),
+                    child: InkWell(
+                      onTap: () => Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) => AddAppointments())),
+                      child: IconAndText.iconAndText(
+                          imageUrl: 'lib/assets/ic_add_appointment.png',
+                          title: "Add Appointment"),
+                    ),
                   ),
                   Expanded(
                     child: InkWell(

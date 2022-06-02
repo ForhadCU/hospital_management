@@ -4,11 +4,11 @@ class MyColors {
   static const Color colorPrimary = Color(0xff3F51B5);
   static const Color colorPrimaryDark = Color(0xff303F9F);
   static const Color colorAccent = Color(0xffFF4081);
-  static const Color demo1 = Color(0xffad1457);
-  static const Color demo2 = Color(0xff880e4f);
-  static const Color demo3 = Color(0xffEF4081);
-  static const Color pink2 = Color(0xffE984B0);
-  static const Color pink = Color(0xffF5B2D1);
+  static const Color c2 = Color(0xffad1457);
+  static const Color c1 = Color(0xff880e4f);
+  static const Color c3 = Color(0xffEF4081);
+  static const Color c4 = Color(0xffE984B0);
+  static const Color c5 = Color(0xffF5B2D1);
   static const Color app2 = Color(0xffF5B2D1);
   static const Color app1 = Color(0xffCC66DD);
   static const Color firstTrimster = Color(0xffF5B2D1);
@@ -22,6 +22,7 @@ class MyColors {
   static const Color unselectedTabOnPrimary = Color(0xfff98da5);
   static const Color dotDarkScreen1 = Color(0xffd1395c);
   static const Color dotLightScreen1 = Color(0xfff98da5);
+  static const Color ratingColor = Color(0xffFFA534);
   static const List<Color> abc = [
     Color(0xffFF8800),
     Color(0xff669900),

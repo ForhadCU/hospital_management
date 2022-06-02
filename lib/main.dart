@@ -1,7 +1,11 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:flutter/material.dart';
 import 'package:my_hospital_app/view/screens/launcher/scr.launcher.dart';
 import 'package:my_hospital_app/view/screens/login/scr.login.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:my_hospital_app/view/screens/patientHome/scr.patientHome.dart';
+import 'package:my_hospital_app/view/screens/patientHome/scr.patientHomeNew.dart';
 
 Future<void> main() async {
    WidgetsFlutterBinding.ensureInitialized();
@@ -22,7 +26,8 @@ class MyApp extends StatelessWidget {
 
         primarySwatch: Colors.blue,
       ),
-      home: const LaucherScreen(),
+      home:  PatientHome(uid: "",),
+      // home: const LaucherScreen(),
     );
   }
 }

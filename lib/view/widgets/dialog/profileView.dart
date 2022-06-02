@@ -24,7 +24,7 @@ class MyProfileDialog extends StatelessWidget {
           children: [
             CircleAvatar(
               radius: 48,
-              backgroundColor: MyColors.pink,
+              backgroundColor: MyColors.c5,
               child: CircleAvatar(
                 radius: 46,
                 backgroundImage: AssetImage('lib/assets/ic_person.png'),

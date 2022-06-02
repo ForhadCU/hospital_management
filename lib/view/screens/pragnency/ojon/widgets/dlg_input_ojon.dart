@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:my_hospital_app/controller/utils/util.custom_text.dart';
 import 'package:my_hospital_app/model/consts/const.colors.dart';
 
-
 class InputOjonDialog extends StatefulWidget {
   const InputOjonDialog({Key? key}) : super(key: key);
 
@@ -23,7 +22,7 @@ class _InputOjonDialogState extends State<InputOjonDialog> {
         child: Column(mainAxisSize: MainAxisSize.min, children: [
           Container(
             padding: EdgeInsets.symmetric(vertical: 16, horizontal: 8),
-            color: MyColors.demo1,
+            color: MyColors.c2,
             alignment: Alignment.center,
             child: CustomText(
               text: 'আপনার প্রাথমিক ওজন ও উচ্চতা দিন',
@@ -257,7 +256,7 @@ class _InputOjonDialogState extends State<InputOjonDialog> {
                 children: [
                   CustomText(
                     text: 'বাতিল',
-                    fontcolor: MyColors.demo3,
+                    fontcolor: MyColors.c3,
                     fontsize: 16,
                     fontWeight: FontWeight.w500,
                   ),
@@ -266,7 +265,7 @@ class _InputOjonDialogState extends State<InputOjonDialog> {
                   ),
                   CustomText(
                     text: 'সংরক্ষণ',
-                    fontcolor: MyColors.demo3,
+                    fontcolor: MyColors.c3,
                     fontsize: 16,
                     fontWeight: FontWeight.w500,
                   ),

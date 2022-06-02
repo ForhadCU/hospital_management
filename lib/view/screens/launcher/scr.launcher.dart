@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_interpolation_to_compose_strings, prefer_const_literals_to_create_immutables, prefer_const_constructors
+/* // ignore_for_file: prefer_interpolation_to_compose_strings, prefer_const_literals_to_create_immutables, prefer_const_constructors
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -43,7 +43,7 @@ class _LaucherScreenState extends State<LaucherScreen> {
             ServicesFirestore.mCheckUserType(_user!.uid).then((userType) {
               print(userType);
 
-              //Check userType
+           /*    //Check userType
               Navigator.pushReplacement(context,
                   MaterialPageRoute(builder: (context) {
                 if (userType == ConstKeys.patient) {
@@ -57,16 +57,45 @@ class _LaucherScreenState extends State<LaucherScreen> {
                 }
 
                 // return AdminHome(uid: uid);
-              }));
-            });
+              })); */
 
-            Navigator.pushReplacement(
+   if (userType == ConstKeys.patient){
+ Navigator.pushReplacement(
+                context,
+                PageTransition(
+                    child: PatientHome(
+                      uid: _user!.uid,
+                    ),
+                    type: PageTransitionType.rightToLeft));}  
+  if (userType == ConstKeys.doctor){
+ Navigator.pushReplacement(
+                context,
+                PageTransition(
+                    child: DoctorHomeScreen(
+                      uId: _user!.uid,
+                    ),
+                    type: PageTransitionType.rightToLeft)); } if (userType == ConstKeys.admin){
+ Navigator.pushReplacement(
                 context,
                 PageTransition(
                     child: AdminHome(
                       uid: _user!.uid,
                     ),
+                    type: PageTransitionType.rightToLeft));}  if (userType == ConstKeys.nurse){
+ Navigator.pushReplacement(
+                context,
+                PageTransition(
+                    child: NurseHomeScreen(
+                      uId: _user!.uid,
+                    ),
                     type: PageTransitionType.rightToLeft));
+   }
+
+        
+
+
+
+           
           } else {
             print(ConstPrintColor.printYellow +
                 "User is not signed in currently " +
@@ -75,8 +104,8 @@ class _LaucherScreenState extends State<LaucherScreen> {
                 MaterialPageRoute(builder: (context) => LoginSceen()));
             // user = ;
           }
-        },
-      );
+        
+      
     });
   }
 
@@ -102,3 +131,4 @@ class _LaucherScreenState extends State<LaucherScreen> {
     );
   }
 }
+ */

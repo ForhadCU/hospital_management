@@ -9,7 +9,6 @@ import 'package:my_hospital_app/view/screens/pragnency/ojon/widgets/wdgt.graphCh
 import 'package:my_hospital_app/view/screens/pragnency/ojon/widgets/wdgt.landscapeGraph.dart';
 import 'package:my_hospital_app/view/screens/pragnency/ojon/widgets/wdgt.viewGraphBtn.dart';
 
-
 class GraphWidget extends StatefulWidget {
   const GraphWidget({Key? key}) : super(key: key);
 
@@ -34,7 +33,7 @@ class _GraphWidgetState extends State<GraphWidget> {
         children: [
           //heading
           Container(
-            color: MyColors.demo2,
+            color: MyColors.c1,
             alignment: Alignment.center,
             padding: EdgeInsets.symmetric(vertical: 5),
             child: CustomText(

@@ -7,7 +7,7 @@ import 'package:my_hospital_app/model/consts/const.colors.dart';
 class ViewGraphButton {
   static Widget viewGraphButton = Container(
     decoration: BoxDecoration(
-        color: MyColors.demo2,
+        color: MyColors.c1,
         borderRadius: BorderRadius.only(
             bottomLeft: Radius.circular(4), bottomRight: Radius.circular(4))),
     margin: EdgeInsets.only(bottom: 10),

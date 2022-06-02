@@ -49,7 +49,7 @@ class _ShagotomScreenState extends State<ShagotomScreen> {
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
-        backgroundColor: MyColors.demo1,
+        backgroundColor: MyColors.c2,
         leading: const Icon(
           Icons.arrow_back,
           color: MyColors.textOnPrimary,
@@ -69,7 +69,7 @@ class _ShagotomScreenState extends State<ShagotomScreen> {
         ],
       ),
       floatingActionButton: FloatingActionButton(
-        backgroundColor: MyColors.demo1,
+        backgroundColor: MyColors.c2,
         onPressed: () {
           showMaterialModalBottomSheet(
               context: context,

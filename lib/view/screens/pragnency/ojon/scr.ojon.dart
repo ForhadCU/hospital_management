@@ -7,9 +7,10 @@ import 'package:my_hospital_app/view/screens/pragnency/ojon/widgets/dlg_input_oj
 import 'package:my_hospital_app/view/screens/pragnency/ojon/widgets/wdgt.graphPart.dart';
 import 'package:my_hospital_app/view/screens/pragnency/ojon/widgets/wdgt.ojonAndWeekPart.dart';
 
-
 class OjonScreen extends StatefulWidget {
-  OjonScreen({Key? key, }) : super(key: key);
+  OjonScreen({
+    Key? key,
+  }) : super(key: key);
 
   @override
   State<OjonScreen> createState() => _OjonScreenState();
@@ -34,7 +35,7 @@ class _OjonScreenState extends State<OjonScreen> {
           fontcolor: MyColors.textOnPrimary,
           fontWeight: FontWeight.normal,
         ),
-        backgroundColor: MyColors.demo1,
+        backgroundColor: MyColors.c2,
         actions: [
           IconButton(
               onPressed: () {

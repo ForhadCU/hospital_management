@@ -4,8 +4,6 @@ import 'package:my_hospital_app/controller/utils/util.my_scr_size.dart';
 import 'package:my_hospital_app/model/consts/const.colors.dart';
 import 'package:my_hospital_app/model/consts/const.data.bn.dart';
 
-
-
 import 'wdgt.timestar_block.dart';
 
 class EkNojoreView extends StatefulWidget {
@@ -42,10 +40,10 @@ class _EkNojoreViewState extends State<EkNojoreView> {
         mainAxisSize: MainAxisSize.min,
         children: [
           Row(
-            children:  const [
+            children: const [
               CustomText(
                 text: MaaData.glance,
-                fontcolor: MyColors.demo1,
+                fontcolor: MyColors.c2,
                 fontWeight: FontWeight.w600,
                 fontsize: 20,
               ),
@@ -136,8 +134,7 @@ class _EkNojoreViewState extends State<EkNojoreView> {
                     "${MaaData.remaining} ${widget.totalRemaingingDays.toString()} ${MaaData.day}",
                 fontsize: 15,
                 fontWeight: FontWeight.bold,
-                                fontcolor: Colors.black54,
-
+                fontcolor: Colors.black54,
               ),
             ],
           )
