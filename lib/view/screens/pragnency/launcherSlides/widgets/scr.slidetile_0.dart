@@ -3,9 +3,6 @@ import 'package:my_hospital_app/controller/utils/util.my_scr_size.dart';
 import 'package:my_hospital_app/model/consts/const.colors.dart';
 import 'package:my_hospital_app/model/consts/const.data.bn.dart';
 
-
-
-
 class SlideTile0 extends StatelessWidget {
   const SlideTile0({Key? key}) : super(key: key);
 
@@ -25,7 +22,7 @@ class SlideTile0 extends StatelessWidget {
           const SizedBox(
             height: 28,
           ),
-         const  Text(MaaData.welcome,
+          const Text(MyData.welcome,
               textAlign: TextAlign.center,
               style: TextStyle(
                   fontWeight: FontWeight.w700,

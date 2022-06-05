@@ -55,7 +55,7 @@ class _ShagotomScreenState extends State<ShagotomScreen> {
           color: MyColors.textOnPrimary,
         ),
         title: const CustomText(
-          text: MaaData.welcome,
+          text: MyData.welcome,
           fontcolor: MyColors.textOnPrimary,
           textAlign: TextAlign.center,
           fontWeight: FontWeight.bold,

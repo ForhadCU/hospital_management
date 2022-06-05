@@ -45,6 +45,7 @@ dependencies:
   modal_bottom_sheet: ^2.0.1
   http: ^0.13.4
   syncfusion_flutter_charts: ^20.1.56
+  getwidget: ^2.0.4
 
 
 dev_dependencies:

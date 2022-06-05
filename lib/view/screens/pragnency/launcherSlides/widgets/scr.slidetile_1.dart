@@ -27,7 +27,7 @@ class _SlideTile1State extends State<SlideTile1> with TickerProviderStateMixin {
 
   _mSelectDate(BuildContext context) async {
     DateTime? selected = startDate;
-    DateTime? _firstDate = DateTime.now().add(Duration(days: - 280));
+    DateTime? _firstDate = DateTime.now().add(Duration(days: -280));
     showDatePicker(
             context: context,
             initialDate: startDate,
@@ -54,7 +54,7 @@ class _SlideTile1State extends State<SlideTile1> with TickerProviderStateMixin {
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           const CustomText(
-            text: MaaData.dateChange,
+            text: MyData.dateChange,
             fontcolor: MyColors.textOnPrimary,
             fontsize: 20,
             fontWeight: FontWeight.w500,
@@ -86,7 +86,7 @@ class _SlideTile1State extends State<SlideTile1> with TickerProviderStateMixin {
             height: 12,
           ),
           const CustomText(
-            text: MaaData.slide_2_title,
+            text: MyData.slide_2_title,
             fontcolor: MyColors.textOnPrimary,
             fontsize: 28,
             fontWeight: FontWeight.w600,

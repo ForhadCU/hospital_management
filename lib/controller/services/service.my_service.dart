@@ -1,11 +1,21 @@
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
+import 'package:intl/intl.dart';
 import 'package:my_hospital_app/model/consts/const.data.bn.dart';
 import 'package:my_hospital_app/model/data_model/model.ojon.dart';
-import 'package:syncfusion_flutter_charts/charts.dart';
 
 class MyServices {
+  static String mGetCurrentTime() {
+    DateTime d = DateTime.now();
+    String s = DateFormat('hh:mm a').format(d);
 
+    return s;
+  }
+
+  static String mGetCurrentDate() {
+    DateTime d = DateTime.now();
+    String s = DateFormat('yMMMMd').format(d);
+
+    return s;
+  }
 
   static String mEncode(String orginalStr) {
     //Using Caesar Chiper Encryption Method
@@ -102,15 +112,15 @@ class MyServices {
   static String getBangNumFormat(int num) {
     String numStr = '';
     if (num == 2 || num == 3) {
-      numStr = MaaData.bangNum[num] + MaaData.bangDateSuffix[1];
+      numStr = MyData.bangNum[num] + MyData.bangDateSuffix[1];
     } else if (num == 4) {
-      numStr = MaaData.bangNum[num] + MaaData.bangDateSuffix[2];
+      numStr = MyData.bangNum[num] + MyData.bangDateSuffix[2];
     } else if (num == 6) {
-      numStr = MaaData.bangNum[num] + MaaData.bangDateSuffix[3];
+      numStr = MyData.bangNum[num] + MyData.bangDateSuffix[3];
     } else if (num <= 10) {
-      numStr = mGenerateBangNum(num) + MaaData.bangDateSuffix[0];
+      numStr = mGenerateBangNum(num) + MyData.bangDateSuffix[0];
     } else if (num <= 45) {
-      numStr = mGenerateBangNum(num) + MaaData.bangDateSuffix[4];
+      numStr = mGenerateBangNum(num) + MyData.bangDateSuffix[4];
     }
 
     return numStr;
@@ -129,7 +139,7 @@ class MyServices {
     String outputStr = '';
 
     for (var i = 0; i < inputStr.length; i++) {
-      outputStr = outputStr + MaaData.bangNum[int.parse(inputStr[i])];
+      outputStr = outputStr + MyData.bangNum[int.parse(inputStr[i])];
     }
     return outputStr;
   }

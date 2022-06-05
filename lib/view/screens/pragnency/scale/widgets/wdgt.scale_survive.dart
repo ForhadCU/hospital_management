@@ -30,9 +30,9 @@ class ScaleSurvive extends StatelessWidget {
                           return TimestarBlock(
                             margin: 0,
                             width: MyScreenSize.mGetWidth(
-                                context, MaaData.sWidthlist[index]),
+                                context, MyData.sWidthlist[index]),
                             color: MyColors.abc[index],
-                            text: MaaData.sLetterlist[index],
+                            text: MyData.sLetterlist[index],
                             fontColor: MyColors.textOnPrimary,
                             textRotate: false,
                             contentAlignment: Alignment.center,
@@ -59,14 +59,14 @@ class ScaleSurvive extends StatelessWidget {
                             itemBuilder: (context, index) {
                               return TimestarBlock(
                                 width: MyScreenSize.mGetWidth(
-                                    context, MaaData.s2Widthlist[index]),
+                                    context, MyData.s2Widthlist[index]),
                                 color: MyColors.redGreenPlates[index],
                                 margin: 0,
                                 textRotate: false,
                               );
                             }),
                         const CustomText(
-                          text: MaaData.survival_posibilty,
+                          text: MyData.survival_posibilty,
                           fontcolor: MyColors.textOnPrimary,
                           fontsize: 16,
                         ),

@@ -8,7 +8,6 @@ import 'package:my_hospital_app/controller/utils/util.my_scr_size.dart';
 import 'package:my_hospital_app/model/consts/const.colors.dart';
 import 'package:my_hospital_app/model/consts/const.data.bn.dart';
 
-
 import 'widgets/wdgt.scale_dynamic_blocks.dart';
 import 'widgets/wdgt.scale_heading.dart';
 import 'widgets/wdgt.scale_instruction.dart';
@@ -167,10 +166,10 @@ class _ScalScreenState extends State<ScalScreen> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               CustomText(
-                                text: '${MaaData.running} ${MyServices.getBangNumFormat(widget.runningWeeks + 1)}' +
-                                    ' ${MaaData.week} (${MyServices.getBangNumFormat(widget.runningMonths)} ${MaaData.month}),' +
+                                text: '${MyData.running} ${MyServices.getBangNumFormat(widget.runningWeeks + 1)}' +
+                                    ' ${MyData.week} (${MyServices.getBangNumFormat(widget.runningMonths)} ${MyData.month}),' +
                                     ' ${MyServices.getBangNumFormat(MyServices.getTimestarNum(widget.runningWeeks + 1).toInt())}' +
-                                    ' ${MaaData.valuelist1[1]}',
+                                    ' ${MyData.valuelist1[1]}',
                                 fontcolor: MyColors.app1,
                                 fontsize: 15,
                                 fontWeight: FontWeight.w500,

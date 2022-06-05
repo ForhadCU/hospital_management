@@ -42,7 +42,7 @@ class _EkNojoreViewState extends State<EkNojoreView> {
           Row(
             children: const [
               CustomText(
-                text: MaaData.glance,
+                text: MyData.glance,
                 fontcolor: MyColors.c2,
                 fontWeight: FontWeight.w600,
                 fontsize: 20,
@@ -56,7 +56,7 @@ class _EkNojoreViewState extends State<EkNojoreView> {
             children: [
               CustomText(
                 text:
-                    '${widget.runningWeeks.toString()} ${MaaData.week} ${widget.runningDays.toString()} ${MaaData.day}',
+                    '${widget.runningWeeks.toString()} ${MyData.week} ${widget.runningDays.toString()} ${MyData.day}',
                 fontsize: 15,
                 fontWeight: FontWeight.bold,
                 fontcolor: Colors.black54,
@@ -131,7 +131,7 @@ class _EkNojoreViewState extends State<EkNojoreView> {
             children: [
               CustomText(
                 text:
-                    "${MaaData.remaining} ${widget.totalRemaingingDays.toString()} ${MaaData.day}",
+                    "${MyData.remaining} ${widget.totalRemaingingDays.toString()} ${MyData.day}",
                 fontsize: 15,
                 fontWeight: FontWeight.bold,
                 fontcolor: Colors.black54,

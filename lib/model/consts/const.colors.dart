@@ -23,6 +23,8 @@ class MyColors {
   static const Color dotDarkScreen1 = Color(0xffd1395c);
   static const Color dotLightScreen1 = Color(0xfff98da5);
   static const Color ratingColor = Color(0xffFFA534);
+  static const Color sc1 = Color(0xff6EDCD9);
+  static const Color sc2 = Color(0xff5902EC);
   static const List<Color> abc = [
     Color(0xffFF8800),
     Color(0xff669900),

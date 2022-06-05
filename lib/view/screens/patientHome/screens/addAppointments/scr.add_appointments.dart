@@ -4,8 +4,10 @@ import 'package:my_hospital_app/controller/utils/util.custom_statusbar.dart';
 import 'package:my_hospital_app/controller/utils/util.custom_text.dart';
 import 'package:my_hospital_app/controller/utils/util.my_scr_size.dart';
 import 'package:my_hospital_app/model/consts/const.colors.dart';
+import 'package:my_hospital_app/model/consts/const.data.bn.dart';
 import 'package:my_hospital_app/model/data_model/model.doctors.dart';
-import 'package:my_hospital_app/view/screens/addAppointments/widget/category.dart';
+import 'package:my_hospital_app/view/screens/patientHome/screens/addAppointments/widget/category.dart';
+import 'package:my_hospital_app/view/screens/patientHome/widgets/dlg_book_appointment.dart';
 import 'package:my_hospital_app/view/screens/patientHome/widgets/doctor_banner.dart';
 
 class AddAppointments extends StatefulWidget {
@@ -19,6 +21,7 @@ class _AddAppointmentsState extends State<AddAppointments> {
   late List<Doctor> doctorsModelList;
   late List<Doctor> specialDoctorsModelList;
   late String catName;
+  String topDoctors = "Top Doctors";
 
   @override
   void initState() {
@@ -73,6 +76,7 @@ class _AddAppointmentsState extends State<AddAppointments> {
             const SizedBox(
               height: 12,
             ),
+            //Category list
             Container(
               height: MyScreenSize.mGetHeight(context, 10),
               alignment: Alignment.centerLeft,
@@ -80,18 +84,19 @@ class _AddAppointmentsState extends State<AddAppointments> {
                 // shrinkWrap: true,
                 scrollDirection: Axis.horizontal,
                 // itemCount: doctorsModelList.length,
-                itemCount: 10,
+                itemCount: MyData.categoryList.length,
                 itemBuilder: (context, index) {
                   return CategoryView(
-                      callback: ()  {
-                        ServicesFirestore.mReadSpecialDoctors("Dentist")
+                      callback: (String catName) {
+                        ServicesFirestore.mReadSpecialDoctors(catName)
                             .then((value) {
                           setState(() {
+                            topDoctors = catName;
                             doctorsModelList = value;
                           });
                         });
                       },
-                      catName: catName);
+                      catName: MyData.categoryList[index]);
                 },
               ),
             ),
@@ -105,14 +110,18 @@ class _AddAppointmentsState extends State<AddAppointments> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  Container(
-                    padding: const EdgeInsets.all(8),
-                    child: const CustomText(
-                      text: "Top Doctors",
-                      fontWeight: FontWeight.bold,
-                      fontsize: 24,
-                      fontcolor: Colors.grey,
-                    ),
+                  Row(
+                    children: [
+                      Container(
+                        padding: const EdgeInsets.all(8),
+                        child: CustomText(
+                          text: "$topDoctors (${doctorsModelList.length})",
+                          fontWeight: FontWeight.bold,
+                          fontsize: 24,
+                          fontcolor: Colors.grey,
+                        ),
+                      ),
+                    ],
                   ),
                   const Divider(
                     height: 1,
@@ -123,19 +132,48 @@ class _AddAppointmentsState extends State<AddAppointments> {
                     height: 12,
                   ),
                   Expanded(
-                    child: ListView.builder(
-                        itemCount: doctorsModelList.isEmpty
-                            ? 0
-                            : doctorsModelList.length,
-                        itemBuilder: (context, index) {
-                          Doctor doctor = doctorsModelList[index];
-                          return DoctorBanner(
-                              name: doctor.name!,
-                              category: doctor.category!,
-                              rating: doctor.rating!,
-                              schFrom: doctor.schedule_start!,
-                              schTo: doctor.schedule_end!);
-                        }),
+                    child: doctorsModelList.isEmpty
+                        ? const Center(
+                            child: CustomText(
+                              text: "Sorry! not avialables.",
+                              fontWeight: FontWeight.w500,
+                              fontcolor: Colors.grey,
+                              fontsize: 18,
+                            ),
+                          )
+                        : ListView.builder(
+                            itemCount: doctorsModelList.isEmpty
+                                ? 0
+                                : doctorsModelList.length,
+                            itemBuilder: (context, index) {
+                              Doctor doctor = doctorsModelList[index];
+
+                              return DoctorBanner(
+                                  callback: () {
+                                    /* print(
+                                        doctor.scheduleModelList![1].from); */
+                                    showDialog(
+                                        context: context,
+                                        builder: (context) {
+                                          return BookAppointmentDialog(
+                                            doct_uid: doctor.userid!,
+                                            scheduleModelList:
+                                                doctor.scheduleModelList!,
+                                            personName: doctor.name!,
+                                            gmail: doctor.email!,
+                                            rating: doctor.rating!,
+                                            consultationFee:
+                                                "${index * 10 + 60}\$",
+                                            category: doctor.category!,
+                                          );
+                                        });
+                                  },
+                                  name: doctor.name!,
+                                  category: doctor.category!,
+                                  rating: doctor.rating!,
+                                  schFrom: doctor.schedule_start!,
+                                  schTo: doctor.schedule_end!);
+                            }),
                   )
                 ],
               ),

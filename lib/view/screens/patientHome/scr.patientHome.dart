@@ -8,9 +8,9 @@ import 'package:my_hospital_app/controller/utils/util.custom_statusbar.dart';
 import 'package:my_hospital_app/controller/utils/util.custom_text.dart';
 import 'package:my_hospital_app/controller/utils/util.my_scr_size.dart';
 import 'package:my_hospital_app/model/consts/const.colors.dart';
-import 'package:my_hospital_app/view/screens/addAppointments/scr.add_appointments.dart';
 import 'package:my_hospital_app/view/screens/adminHome/screen/appointment/scr.appointment.dart';
 import 'package:my_hospital_app/view/screens/login/scr.login.dart';
+import 'package:my_hospital_app/view/screens/patientHome/screens/addAppointments/scr.add_appointments.dart';
 import 'package:my_hospital_app/view/screens/patientHome/widgets/iconButtons.dart';
 import 'package:my_hospital_app/view/screens/patientHome/widgets/user_banner.dart';
 

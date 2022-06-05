@@ -5,13 +5,10 @@ import 'package:my_hospital_app/model/consts/const.colors.dart';
 import 'package:my_hospital_app/model/consts/const.data.bn.dart';
 import 'package:my_hospital_app/view/screens/pragnency/shagotom/widgets/wdgt.timestar_block.dart';
 
-
-
-
-
 class ScaleStaticBlocks extends StatelessWidget {
   final List<Color> timestarColorList;
-  const ScaleStaticBlocks({Key? key, required this.timestarColorList}) : super(key: key);
+  const ScaleStaticBlocks({Key? key, required this.timestarColorList})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -47,7 +44,7 @@ class ScaleStaticBlocks extends StatelessWidget {
                       child: Container(
                         alignment: Alignment.center,
                         child: const CustomText(
-                          text: MaaData.first_timestar,
+                          text: MyData.first_timestar,
                           fontcolor: MyColors.textOnPrimary,
                           fontsize: 14.5,
                           fontWeight: FontWeight.bold,
@@ -59,7 +56,7 @@ class ScaleStaticBlocks extends StatelessWidget {
                       child: Container(
                         alignment: Alignment.center,
                         child: const CustomText(
-                          text: MaaData.second_timestar,
+                          text: MyData.second_timestar,
                           fontcolor: MyColors.textOnPrimary,
                           fontsize: 14.5,
                           fontWeight: FontWeight.bold,
@@ -71,7 +68,7 @@ class ScaleStaticBlocks extends StatelessWidget {
                       child: Container(
                         alignment: Alignment.center,
                         child: const CustomText(
-                          text: MaaData.third_timestar,
+                          text: MyData.third_timestar,
                           fontcolor: MyColors.textOnPrimary,
                           fontsize: 14.5,
                           fontWeight: FontWeight.bold,

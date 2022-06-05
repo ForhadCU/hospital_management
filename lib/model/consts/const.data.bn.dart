@@ -1,6 +1,6 @@
 // ignore_for_file: constant_identifier_names
 
-class MaaData {
+class MyData {
   static const String title_activity_main = 'মা অ্যাপে স্বাগতম';
   static const String next = 'পরবর্তী';
   static const String previous = 'পূর্ববর্তী';
@@ -22,6 +22,14 @@ class MaaData {
   static const String weekly_change = 'সাপ্তাহিক পরিবর্তন';
   static const String text1 = 'বিস্তারিত জানতে এখানে চাপুন';
   static const String text2 = 'তৃতীয় সপ্তাহ হতে এখানে তথ্য দেখতে পাবেন';
+  static const List<String> categoryList = [
+    "Dentist",
+    "Diabetes Specialist",
+    "Gynecologist",
+    "Radiologist",
+    "Cardiologist",
+    "Nutritionist"
+  ];
   static const List<double> sWidthlist = [37.6, 10.2, 6.5];
   static const List<double> s2Widthlist = [
     2.2,
@@ -108,7 +116,6 @@ class MaaData {
     "দীর্ঘ পথ পরিক্রমায় আপনাকে অভিনন্দন। শিশু আপনার কোলে আসার জন্য এখন সম্পূর্ণ প্রস্তুত!",
     "শিশুটির ওজন এখন সাড়ে তিন কেজির কাছাকাছি। আগামী সপ্তাহের মধ্যেও সে বেরোতে না চাইলে ডাক্তার তাকে জোর করে বের করতে চাইবেন!",
     "ডাক্তারের পরামর্শ নিন।"
-
   ];
 
   static final List<String> dummyWeeklyChange = [
@@ -124,5 +131,4 @@ class MaaData {
     '12',
     '13'
   ];
-
 }

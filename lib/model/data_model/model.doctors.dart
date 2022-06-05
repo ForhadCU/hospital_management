@@ -1,5 +1,7 @@
 // ignore_for_file: non_constant_identifier_names
 
+import 'package:my_hospital_app/model/data_model/model.schedule.dart';
+
 class Doctor {
   String? userid;
   String? name;
@@ -8,15 +10,19 @@ class Doctor {
   String? email;
   String? schedule_end;
   String? schedule_start;
+  List<ScheduleModel>? scheduleModelList;
 
   Doctor(
-      {this.userid,
+      {
+      this.scheduleModelList,
+      this.userid,
       this.name,
       this.category,
       this.rating,
       this.email,
       this.schedule_start,
-      this.schedule_end});
+      this.schedule_end
+      });
 /*   Doctors(
       {required this.userid,
       required this.name,

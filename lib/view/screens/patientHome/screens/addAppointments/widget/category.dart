@@ -16,7 +16,7 @@ class CategoryView extends StatelessWidget {
         InkWell(
           borderRadius: BorderRadius.circular(12),
           onTap: () {
-            callback();
+            callback(catName);
           },
           child: Container(
             margin: const EdgeInsets.only(right: 8),
@@ -31,6 +31,8 @@ class CategoryView extends StatelessWidget {
                 ]),
             child: CustomText(
               text: catName,
+              fontWeight: FontWeight.w400,
+              fontcolor: MyColors.c3,
             ),
           ),
         ),

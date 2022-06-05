@@ -5,7 +5,7 @@ import 'package:my_hospital_app/model/consts/const.data.bn.dart';
 import 'package:my_hospital_app/view/screens/pragnency/shagotom/widgets/wdgt.timestar_block.dart';
 
 class ScaleInstructionView extends StatelessWidget {
-  const ScaleInstructionView({ Key? key }) : super(key: key);
+  const ScaleInstructionView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +23,7 @@ class ScaleInstructionView extends StatelessWidget {
                     itemCount: 5,
                     itemBuilder: (context, index) {
                       return TimestarBlock(
-                        text: MaaData.headinglist[index],
+                        text: MyData.headinglist[index],
                         color: MyColors.app1,
                         fontColor: MyColors.textOnPrimary,
                         height: MyScreenSize.mGetHeight(context, 5.5),
@@ -42,7 +42,7 @@ class ScaleInstructionView extends StatelessWidget {
                       itemCount: 5,
                       itemBuilder: (context, index) {
                         return TimestarBlock(
-                          text: MaaData.valuelist1[index],
+                          text: MyData.valuelist1[index],
                           // color: MyColors.app1,
                           // fontColor: MyColors.textOnPrimary,
                           height: MyScreenSize.mGetHeight(context, 5.5),
@@ -68,7 +68,7 @@ class ScaleInstructionView extends StatelessWidget {
                       itemCount: 3,
                       itemBuilder: (context, index) {
                         return TimestarBlock(
-                          text: MaaData.valuelist2[index],
+                          text: MyData.valuelist2[index],
                           height: MyScreenSize.mGetHeight(context, 5.5),
                           contentAlignment: Alignment.centerRight,
                           // textRotate: false,
@@ -82,7 +82,7 @@ class ScaleInstructionView extends StatelessWidget {
                     itemCount: 3,
                     itemBuilder: (context, index) {
                       return TimestarBlock(
-                        text: MaaData.sLetterlist[index],
+                        text: MyData.sLetterlist[index],
                         color: MyColors.abc[index],
                         fontColor: MyColors.textOnPrimary,
                         height: MyScreenSize.mGetHeight(context, 5.5),

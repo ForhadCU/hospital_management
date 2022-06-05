@@ -3,6 +3,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:my_hospital_app/controller/services/service.my_service.dart';
 import 'package:my_hospital_app/model/consts/keywords.dart';
 import 'package:my_hospital_app/model/data_model/model.doctors.dart';
+import 'package:my_hospital_app/model/data_model/model.notification.dart';
+import 'package:my_hospital_app/model/data_model/model.schedule.dart';
 
 class ServicesFirestore {
   static final CollectionReference collRefUser =
@@ -18,19 +20,120 @@ class ServicesFirestore {
   /*  static final DocumentReference adminDocRef =
       ServicesFirestore.collRefAdmin.doc(); */
 
+  static Future<void> mAppointmentReq(
+      String doctUid,
+      String myUid,
+      String from,
+      String to,
+      String visitDate,
+      String scheduleId,
+      String sentDate,
+      String sentTime) async {
+    final FirebaseFirestore db = FirebaseFirestore.instance;
+    NotificationModel model = NotificationModel(
+        from: from,
+        to: to,
+        visitDate: visitDate,
+        senderUid: myUid,
+        doctUid: doctUid,
+        sentDate: sentDate,
+        sentTime: sentTime,
+        scheduleId: scheduleId,
+        notifId: '');
+
+    await db
+        .collection(ConstKeys.adminCollRef)
+        .doc('gEmAMDRZYXtkJOklftDk')
+        .collection(ConstKeys.notifications)
+        .add(model.toMap())
+        .then((value) => db
+            .collection(ConstKeys.adminCollRef)
+            .doc('gEmAMDRZYXtkJOklftDk')
+            .collection(ConstKeys.notifications)
+            .doc(value.id)
+            .update({'notifId': value.id}));
+  }
+
+  static Future<List<ScheduleModel>> mFetchSchedules(
+      String doctUid, String selectedDate) async {
+    final FirebaseFirestore db = FirebaseFirestore.instance;
+    List<ScheduleModel> list = [];
+    List<String> bookedScheIdList = [];
+
+//read Notification of specific doctor
+    QuerySnapshot<Map<String, dynamic>> querySnapshot = await db
+        .collection(ConstKeys.doctorCollRef)
+        .doc(doctUid)
+        .collection(ConstKeys.notifications)
+        .get();
+
+    for (var element in querySnapshot.docs) {
+      print(
+          "selectedDate: $selectedDate   visitedDate: ${element.get('visit_date')}");
+      if (element.get('visit_date') == selectedDate) {
+        bookedScheIdList.add(element.get('schedule_id'));
+        db
+            .collection(ConstKeys.doctorCollRef)
+            .doc(doctUid)
+            .collection(ConstKeys.schedules)
+            .doc(element.get('schedule_id'))
+            .update({"status": false});
+      } else{
+        db
+            .collection(ConstKeys.doctorCollRef)
+            .doc(doctUid)
+            .collection(ConstKeys.schedules)
+            .doc(element.get('schedule_id'))
+            .update({"status": true});
+      }
+    }
+
+    QuerySnapshot<Map<String, dynamic>> querySnapshot1 = await db
+        .collection(ConstKeys.doctorCollRef)
+        .doc(doctUid)
+        .collection(ConstKeys.schedules)
+        .get();
+
+    list =
+        querySnapshot1.docs.map((e) => ScheduleModel.fromMap(e.data())).toList();
+    /*  Future.delayed(Duration(milliseconds: 2000)).then((value) => null) */
+    return list;
+  }
+
   static Future<List<Doctor>> mReadSpecialDoctors(String catName) async {
     final FirebaseFirestore db = FirebaseFirestore.instance;
     List<Doctor> specialDoctorModelList = [];
+    List<ScheduleModel> scheduleModelList = [];
 
-    QuerySnapshot<Map<String, dynamic>> querySnapshot =
+    QuerySnapshot<Map<String, dynamic>> querySnapshotDetails =
         await db.collection(ConstKeys.doctorCollRef).get();
+    QuerySnapshot<Map<String, dynamic>> querySnapshotSchedules = await db
+        .collection(ConstKeys.doctorCollRef)
+        .doc("EM8maKc2FJ2WLM9HSfIW")
+        .collection(ConstKeys.schedules)
+        .get();
 
+    //convert querySnapshot
     List<Doctor> doctorModelList =
-        querySnapshot.docs.map((e) => Doctor.fromMap(e.data())).toList();
+        querySnapshotDetails.docs.map((e) => Doctor.fromMap(e.data())).toList();
+    List<ScheduleModel> scheduleList = querySnapshotSchedules.docs
+        .map((e) => ScheduleModel.fromMap(e.data()))
+        .toList();
 
     for (var i = 0; i < doctorModelList.length; i++) {
       Doctor doctor = doctorModelList[i];
       if (doctor.category == catName) {
+        //get schedule collection for this doctor doc
+        QuerySnapshot<Map<String, dynamic>> querySnapshotSchedules = await db
+            .collection(ConstKeys.doctorCollRef)
+            .doc(doctor.userid)
+            .collection(ConstKeys.schedules)
+            .get();
+        List<ScheduleModel> scheduleList = querySnapshotSchedules.docs
+            .map((e) => ScheduleModel.fromMap(e.data()))
+            .toList();
+
+        //add all data into DoctorModel
         specialDoctorModelList.add(Doctor(
             userid: doctor.userid,
             name: doctor.name,
@@ -38,7 +141,8 @@ class ServicesFirestore {
             rating: doctor.rating,
             email: doctor.email,
             schedule_start: doctor.schedule_start,
-            schedule_end: doctor.schedule_end));
+            schedule_end: doctor.schedule_end,
+            scheduleModelList: scheduleList));
       }
     }
     return specialDoctorModelList;

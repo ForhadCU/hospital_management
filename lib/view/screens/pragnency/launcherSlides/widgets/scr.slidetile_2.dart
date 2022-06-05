@@ -7,8 +7,6 @@ import 'package:my_hospital_app/model/consts/const.data.bn.dart';
 import 'package:my_hospital_app/model/consts/keywords.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-
-
 class SlideTile2 extends StatefulWidget {
   const SlideTile2({Key? key}) : super(key: key);
 
@@ -38,7 +36,7 @@ class _SlideTile2State extends State<SlideTile2> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           const CustomText(
-            text: MaaData.dateChange,
+            text: MyData.dateChange,
             fontcolor: MyColors.textOnPrimary,
             fontsize: 20,
             fontWeight: FontWeight.w500,
@@ -69,7 +67,7 @@ class _SlideTile2State extends State<SlideTile2> {
             height: 12,
           ),
           const CustomText(
-            text: MaaData.slide_3_title,
+            text: MyData.slide_3_title,
             fontcolor: MyColors.textOnPrimary,
             fontsize: 28,
             fontWeight: FontWeight.w600,

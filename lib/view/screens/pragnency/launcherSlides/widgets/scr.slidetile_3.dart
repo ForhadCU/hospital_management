@@ -7,9 +7,6 @@ import 'package:my_hospital_app/model/consts/const.data.bn.dart';
 import 'package:my_hospital_app/model/consts/keywords.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-
-
-
 class SlideTile3 extends StatefulWidget {
   const SlideTile3({Key? key}) : super(key: key);
 
@@ -62,7 +59,7 @@ class _SlideTile3State extends State<SlideTile3> {
             height: 12,
           ),
           const CustomText(
-            text: MaaData.glance,
+            text: MyData.glance,
             fontcolor: MyColors.textOnPrimary,
             fontsize: 28,
             fontWeight: FontWeight.w600,
@@ -75,7 +72,7 @@ class _SlideTile3State extends State<SlideTile3> {
             children: [
               CustomText(
                 text:
-                    "${MaaData.running} ${runingWeek.toString()} ${MaaData.week} ${runingDay.toString()} ${MaaData.day}",
+                    "${MyData.running} ${runingWeek.toString()} ${MyData.week} ${runingDay.toString()} ${MyData.day}",
                 fontcolor: MyColors.textOnPrimary,
                 fontWeight: FontWeight.w400,
                 fontsize: 18,
@@ -92,7 +89,7 @@ class _SlideTile3State extends State<SlideTile3> {
             children: [
               CustomText(
                 text:
-                    "${MaaData.remaining} ${remainingWeek.toString()} ${MaaData.week} ${remainingDay.toString()} ${MaaData.day} ( ${totalDay.toString()} ${MaaData.day} )",
+                    "${MyData.remaining} ${remainingWeek.toString()} ${MyData.week} ${remainingDay.toString()} ${MyData.day} ( ${totalDay.toString()} ${MyData.day} )",
                 fontcolor: MyColors.textOnPrimary,
                 fontWeight: FontWeight.w400,
                 fontsize: 18,

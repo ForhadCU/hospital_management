@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_constructors
+/* // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
 import 'package:my_hospital_app/view/screens/patientHome/widgets/doctor_banner.dart';
@@ -24,3 +24,4 @@ class _PatientHomeNewState extends State<PatientHomeNew> {
     )));
   }
 }
+ */

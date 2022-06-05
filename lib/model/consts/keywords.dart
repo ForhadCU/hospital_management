@@ -12,11 +12,12 @@ class ConstKeys {
   static const String patient = "Patient";
   static const String admin = "Admin";
   static const String nurse = "Nurse";
+  static const String schedules = "Schedules";
+  static const String notifications = "Notifications";
 
   ///////***********************////////////
 
   static const String collRefTimeRecord = "TimeRecord";
-  static const String collRefNotification = "Notification";
   static const String timeno = "timeno";
   static const String elapsedtime = "elapsedtime";
   static const String empno = "empno";
