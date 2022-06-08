@@ -17,6 +17,8 @@ class ServicesFirestore {
       FirebaseFirestore.instance.collection(ConstKeys.patientCollRef);
   static final CollectionReference collRefNurse =
       FirebaseFirestore.instance.collection(ConstKeys.nurseCollRef);
+      static final CollectionReference collRefNotification =
+      FirebaseFirestore.instance.collection(ConstKeys.notifications);
   /*  static final DocumentReference adminDocRef =
       ServicesFirestore.collRefAdmin.doc(); */
 
@@ -28,9 +30,10 @@ class ServicesFirestore {
       String visitDate,
       String scheduleId,
       String sentDate,
-      String sentTime) async {
+      String sentTime, int dateTime) async {
     final FirebaseFirestore db = FirebaseFirestore.instance;
     NotificationModel model = NotificationModel(
+      dateTime: dateTime,
         from: from,
         to: to,
         visitDate: visitDate,
@@ -39,6 +42,7 @@ class ServicesFirestore {
         sentDate: sentDate,
         sentTime: sentTime,
         scheduleId: scheduleId,
+        readStatus: 'unread',
         notifId: '');
 
     await db

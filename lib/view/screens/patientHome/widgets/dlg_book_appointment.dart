@@ -318,6 +318,8 @@ class _BookAppointmentDialogState extends State<BookAppointmentDialog> {
                                 isRequestingAppointment = true;
                               });
                               if (from != '') {
+                                final int dateTime =
+                                    DateTime.now().millisecondsSinceEpoch;
                                 ServicesFirestore.mAppointmentReq(
                                         widget.doct_uid,
                                         myUid,
@@ -326,12 +328,13 @@ class _BookAppointmentDialogState extends State<BookAppointmentDialog> {
                                         visitDate,
                                         scheduleId,
                                         MyServices.mGetCurrentDate(),
-                                        MyServices.mGetCurrentTime())
+                                        MyServices.mGetCurrentTime(),
+                                        dateTime)
                                     .then((value) {
                                   // Navigator.pop(context);
-                            
-                                    isRequestingAppointment = false;
-                                    Navigator.pop(context);
+
+                                  isRequestingAppointment = false;
+                                  Navigator.pop(context);
                                 });
                               } else {
                                 setState(() {

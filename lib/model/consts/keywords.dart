@@ -5,6 +5,7 @@ class ConstKeys {
       IconData(0xe4a2, fontFamily: 'MaterialIcons');
   static const String userCollRef = "USERS";
   static const String adminCollRef = "ADMINS";
+  static const String adminDocId = "gEmAMDRZYXtkJOklftDk";
   static const String doctorCollRef = "DOCTORS";
   static const String patientCollRef = "PATIENTS";
   static const String nurseCollRef = "NURSES";
@@ -14,6 +15,7 @@ class ConstKeys {
   static const String nurse = "Nurse";
   static const String schedules = "Schedules";
   static const String notifications = "Notifications";
+  static const String readStatus = "readStatus";
 
   ///////***********************////////////
 
