@@ -10,9 +10,17 @@ class NotificationModel {
   String? doctUid;
   int? dateTime;
   String? readStatus;
+  String? patientAppnointmentId;
+  String? acceptStatus;
+  String? doc_id;
 
   NotificationModel(
-      {this.readStatus,
+      {
+        
+        this.readStatus,
+        this.doc_id,
+      this.acceptStatus,
+      this.patientAppnointmentId,
       this.doctUid,
       this.from,
       this.to,
@@ -36,6 +44,9 @@ class NotificationModel {
     doctUid = map['doctUid'];
     dateTime = map['dateTime'];
     readStatus = map['readStatus'];
+    patientAppnointmentId = map['patientAppnointmentId'];
+    acceptStatus = map['acceptStatus'];
+    doc_id = map['doc_id'];
   }
 
   Map<String, dynamic> toMap() {
@@ -51,6 +62,9 @@ class NotificationModel {
     map['doctUid'] = doctUid;
     map['dateTime'] = dateTime;
     map['readStatus'] = readStatus;
+    map['patientAppnointmentId'] = patientAppnointmentId;
+    map['acceptStatus'] = acceptStatus;
+    map['doc_id'] = doc_id;
 
     return map;
   }

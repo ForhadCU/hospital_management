@@ -166,7 +166,7 @@ class _AdminHomeState extends State<AdminHome> {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => AdminAppointmentSceen()));
+                                builder: (context) => AdminAppointmentScreen()));
                       },
                       child: IconAndText.iconAndText(
                           imageUrl: 'lib/assets/appointments.png',

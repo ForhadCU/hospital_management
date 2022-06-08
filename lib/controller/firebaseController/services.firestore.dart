@@ -17,23 +17,51 @@ class ServicesFirestore {
       FirebaseFirestore.instance.collection(ConstKeys.patientCollRef);
   static final CollectionReference collRefNurse =
       FirebaseFirestore.instance.collection(ConstKeys.nurseCollRef);
-      static final CollectionReference collRefNotification =
+  static final CollectionReference collRefNotification =
       FirebaseFirestore.instance.collection(ConstKeys.notifications);
   /*  static final DocumentReference adminDocRef =
       ServicesFirestore.collRefAdmin.doc(); */
 
-  static Future<void> mAppointmentReq(
-      String doctUid,
-      String myUid,
-      String from,
-      String to,
-      String visitDate,
-      String scheduleId,
-      String sentDate,
-      String sentTime, int dateTime) async {
+  static Future<void> mUpdatePatientAppointment(
+      String acceptStatus,
+      String adminAppointmentId,
+      String patientDocId,
+      String patientAppointmentId) async {
+    FirebaseFirestore db = FirebaseFirestore.instance;
+    await db
+        .collection(ConstKeys.patientCollRef)
+        .doc(patientDocId)
+        .collection(ConstKeys.appointments)
+        .doc(patientAppointmentId)
+        .update(
+      {'acceptStatus': acceptStatus, 'readStatus': 'unread'},
+    );
+
+    await db
+        .collection(ConstKeys.adminCollRef)
+        .doc(ConstKeys.adminDocId)
+        .collection(ConstKeys.appointments)
+        .doc(adminAppointmentId)
+        .update(
+      {
+        'acceptStatus': acceptStatus,
+      },
+    );
+  }
+
+  static Future<void> mSendNotiToDoctor(
+      {required String doctUid,
+   required   String myUid,
+    required  String from,
+    required  String to,
+    required  String visitDate,
+    required  String scheduleId,
+    required  String sentDate,
+    required  String sentTime,
+    required  int dateTime}) async {
     final FirebaseFirestore db = FirebaseFirestore.instance;
-    NotificationModel model = NotificationModel(
-      dateTime: dateTime,
+    NotificationModel model1 = NotificationModel(
+        dateTime: dateTime,
         from: from,
         to: to,
         visitDate: visitDate,
@@ -43,16 +71,134 @@ class ServicesFirestore {
         sentTime: sentTime,
         scheduleId: scheduleId,
         readStatus: 'unread',
+        patientAppnointmentId: '',
+        acceptStatus: 'Confirm',
         notifId: '');
-
+    String? doc_id;
+    //Add patient Appointment
     await db
-        .collection(ConstKeys.adminCollRef)
-        .doc('gEmAMDRZYXtkJOklftDk')
+        .collection(ConstKeys.doctorCollRef)
+        .doc(doctUid)
+        .collection(ConstKeys.appointments)
+        .add(model1.toMap())
+        .then((value) {
+      doc_id = value.id;
+      return db
+          .collection(ConstKeys.doctorCollRef)
+          .doc(doctUid)
+          .collection(ConstKeys.appointments)
+          .doc(value.id)
+          .update({'doc_id': value.id});
+    });
+
+    //doctor Notification
+
+    NotificationModel model = NotificationModel(
+        dateTime: dateTime,
+        from: from,
+        to: to,
+        visitDate: visitDate,
+        senderUid: myUid,
+        doctUid: doctUid,
+        sentDate: sentDate,
+        sentTime: sentTime,
+        scheduleId: scheduleId,
+        readStatus: 'unread',
+        acceptStatus: 'Confirm',
+        notifId: '');
+    await db
+        .collection(ConstKeys.doctorCollRef)
+        .doc(doctUid)
         .collection(ConstKeys.notifications)
         .add(model.toMap())
         .then((value) => db
+            .collection(ConstKeys.doctorCollRef)
+            .doc(doctUid)
+            .collection(ConstKeys.notifications)
+            .doc(value.id)
+            .update({'notifId': value.id}));
+  }
+
+  static Future<void> mAppointmentReq(
+      String doctUid,
+      String myUid,
+      String from,
+      String to,
+      String visitDate,
+      String scheduleId,
+      String sentDate,
+      String sentTime,
+      int dateTime) async {
+    final FirebaseFirestore db = FirebaseFirestore.instance;
+    NotificationModel model1 = NotificationModel(
+        dateTime: dateTime,
+        from: from,
+        to: to,
+        visitDate: visitDate,
+        senderUid: myUid,
+        doctUid: doctUid,
+        sentDate: sentDate,
+        sentTime: sentTime,
+        scheduleId: scheduleId,
+        readStatus: 'unread',
+        patientAppnointmentId: '',
+        acceptStatus: 'Pending',
+        notifId: '');
+    String? patientAppointmentId;
+    //Add patient Appointment
+    await db
+        .collection(ConstKeys.patientCollRef)
+        .doc(ConstKeys.patientDocId)
+        .collection(ConstKeys.appointments)
+        .add(model1.toMap())
+        .then((value) {
+      patientAppointmentId = value.id;
+      return db
+          .collection(ConstKeys.patientCollRef)
+          .doc(ConstKeys.patientDocId)
+          .collection(ConstKeys.appointments)
+          .doc(value.id)
+          .update({'patientAppnointmentId': value.id});
+    });
+
+    //admin Notification
+
+    NotificationModel model2 = NotificationModel(
+        dateTime: dateTime,
+        from: from,
+        to: to,
+        visitDate: visitDate,
+        senderUid: myUid,
+        doctUid: doctUid,
+        sentDate: sentDate,
+        sentTime: sentTime,
+        scheduleId: scheduleId,
+        readStatus: 'unread',
+        acceptStatus: 'Pending',
+        patientAppnointmentId: patientAppointmentId,
+        notifId: '');
+    //appointment
+    await db
+        .collection(ConstKeys.adminCollRef)
+        .doc(ConstKeys.adminDocId)
+        .collection(ConstKeys.appointments)
+        .add(model2.toMap())
+        .then((value) => db
             .collection(ConstKeys.adminCollRef)
-            .doc('gEmAMDRZYXtkJOklftDk')
+            .doc(ConstKeys.adminDocId)
+            .collection(ConstKeys.appointments)
+            .doc(value.id)
+            .update({'notifId': value.id}));
+
+    //notification
+    await db
+        .collection(ConstKeys.adminCollRef)
+        .doc(ConstKeys.adminDocId)
+        .collection(ConstKeys.notifications)
+        .add(model2.toMap())
+        .then((value) => db
+            .collection(ConstKeys.adminCollRef)
+            .doc(ConstKeys.adminDocId)
             .collection(ConstKeys.notifications)
             .doc(value.id)
             .update({'notifId': value.id}));
@@ -72,22 +218,20 @@ class ServicesFirestore {
         .get();
 
     for (var element in querySnapshot.docs) {
-      print(
-          "selectedDate: $selectedDate   visitedDate: ${element.get('visit_date')}");
-      if (element.get('visit_date') == selectedDate) {
-        bookedScheIdList.add(element.get('schedule_id'));
+      if (element.get('visitDate') == selectedDate) {
+        bookedScheIdList.add(element.get('scheduleId'));
         db
             .collection(ConstKeys.doctorCollRef)
             .doc(doctUid)
             .collection(ConstKeys.schedules)
-            .doc(element.get('schedule_id'))
+            .doc(element.get('scheduleId'))
             .update({"status": false});
-      } else{
+      } else {
         db
             .collection(ConstKeys.doctorCollRef)
             .doc(doctUid)
             .collection(ConstKeys.schedules)
-            .doc(element.get('schedule_id'))
+            .doc(element.get('scheduleId'))
             .update({"status": true});
       }
     }
@@ -98,8 +242,9 @@ class ServicesFirestore {
         .collection(ConstKeys.schedules)
         .get();
 
-    list =
-        querySnapshot1.docs.map((e) => ScheduleModel.fromMap(e.data())).toList();
+    list = querySnapshot1.docs
+        .map((e) => ScheduleModel.fromMap(e.data()))
+        .toList();
     /*  Future.delayed(Duration(milliseconds: 2000)).then((value) => null) */
     return list;
   }

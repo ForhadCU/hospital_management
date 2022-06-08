@@ -130,11 +130,11 @@ class _PatientHomeState extends State<PatientHome> {
                   Expanded(
                     child: InkWell(
                       onTap: () {
-                        Navigator.push(
+                        /*  Navigator.push(
                             context,
                             MaterialPageRoute(
                                 builder: ((context) =>
-                                    AdminAppointmentSceen())));
+                                    AdminAppointmentSceen()))); */
                       },
                       child: IconAndText.iconAndText(
                           imageUrl: 'lib/assets/appointments.png',

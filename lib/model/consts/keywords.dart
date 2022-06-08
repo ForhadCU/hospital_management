@@ -6,6 +6,7 @@ class ConstKeys {
   static const String userCollRef = "USERS";
   static const String adminCollRef = "ADMINS";
   static const String adminDocId = "gEmAMDRZYXtkJOklftDk";
+  static const String patientDocId = "a7psj74icnNIJsCZGShG";
   static const String doctorCollRef = "DOCTORS";
   static const String patientCollRef = "PATIENTS";
   static const String nurseCollRef = "NURSES";
@@ -15,6 +16,7 @@ class ConstKeys {
   static const String nurse = "Nurse";
   static const String schedules = "Schedules";
   static const String notifications = "Notifications";
+  static const String appointments = "Appointments";
   static const String readStatus = "readStatus";
 
   ///////***********************////////////

@@ -7,6 +7,7 @@ import 'package:my_hospital_app/controller/services/service.my_service.dart';
 import 'package:my_hospital_app/controller/utils/util.custom_statusbar.dart';
 import 'package:my_hospital_app/controller/utils/util.custom_text.dart';
 import 'package:my_hospital_app/model/consts/keywords.dart';
+import 'package:my_hospital_app/view/screens/adminHome/screen/appointment/scr.appointment.dart';
 import 'package:my_hospital_app/view/screens/adminHome/screen/notifiaction/widget/noti_item.dart';
 
 class MyNotificationScreen extends StatefulWidget {
@@ -88,33 +89,25 @@ class _MyNotificationScreenState extends State<MyNotificationScreen> {
                 physics: BouncingScrollPhysics(),
                 itemCount: myData.size,
                 itemBuilder: (bcontext, index) {
-                  // double h_ratio = selectedDateList.length < 2 ? 0.7 : 0.5;
-                 
+                  //update readStatus
+                  myData.docs[index]['readStatus'] == 'unread'
+                      ? _mUpdateStatus(myData.docs[index].id)
+                      : null;
 
-                  // print(myData.docs[index]['doctUid']);
-
-                  return /* Container(); */
-                      AdminNotiItem(
-                          name: myData.docs[index]['doctUid'],
-                          appointmentId: "appointmentId",
-                          gender: "gender",
-                          age: "age",
-                          mobile: "mobile",
-                          appointementDate: "appointementDate",
-                          appointmentTime: "appointmentTime",
-                          appointmentType: "appointmentType",
-                          appointmentStatus: "appointmentStatus")
-                      /* NotificationModel(
-                    avatarurl: avatarurl,
-                    desc: desc,
-                    title: title,
-                    userid: userid,
-                    noticeid: noticeid,
-                    noticeimgurl: noticeimgurl,
-                    subtitle: "subtitle",
-                    status: status,
-                  ) */
-                      ;
+                  return AdminNotiItem(
+                    callback: (){
+                      Navigator.of(context).push(MaterialPageRoute(
+              builder: (context) => AdminAppointmentScreen()));
+                    },
+                      name: myData.docs[index]['doctUid'],
+                      appointmentId: "appointmentId",
+                      gender: "gender",
+                      age: "age",
+                      mobile: "mobile",
+                      appointementDate: "appointementDate",
+                      appointmentTime: myData.docs[index]['sentTime'],
+                      appointmentType: "appointmentType",
+                      appointmentStatus: "appointmentStatus");
                 },
               );
             }),
@@ -204,8 +197,12 @@ class _MyNotificationScreenState extends State<MyNotificationScreen> {
   }
 
   void _mUpdateStatus(String id) {
-    ServicesFirestore.collRefNotification
+    print(id);
+    FirebaseFirestore.instance
+        .collection(ConstKeys.adminCollRef)
+        .doc(ConstKeys.adminDocId)
+        .collection(ConstKeys.notifications)
         .doc(id)
-        .update({ConstKeys.status: "read"});
+        .update({ConstKeys.readStatus: "read"});
   }
 }

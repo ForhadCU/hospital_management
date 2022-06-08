@@ -6,6 +6,7 @@ import 'package:my_hospital_app/controller/services/service.my_service.dart';
 import 'package:my_hospital_app/controller/utils/util.custom_text.dart';
 import 'package:my_hospital_app/controller/utils/util.my_scr_size.dart';
 import 'package:my_hospital_app/model/consts/const.colors.dart';
+import 'package:my_hospital_app/model/consts/keywords.dart';
 import 'package:my_hospital_app/model/data_model/model.schedule.dart';
 import 'package:my_hospital_app/view/screens/patientHome/widgets/sche_view.dart';
 import 'package:my_hospital_app/view/widgets/dot_blink_loader.dart';
@@ -46,7 +47,7 @@ class _BookAppointmentDialogState extends State<BookAppointmentDialog> {
   String sentDate = '';
   String sentTime = '';
   String visitDate = '';
-  String myUid = '';
+  String myUid = ConstKeys.patientDocId;
 
   @override
   void initState() {
