@@ -37,9 +37,9 @@ class MyApp extends StatelessWidget {
           appointmentTime: "appointmentTime",
           appointmentType: "appointmentType",
           appointmentStatus: "appointmentStatus"), */
-      home:  AdminHome(uid: "",),
+      // home:  AdminHome(uid: "",),
       // home:  PatientHome(uid: "",),
-      // home: const LaucherScreen(),
+      home: const LauncherScreen(),
     );
   }
 }

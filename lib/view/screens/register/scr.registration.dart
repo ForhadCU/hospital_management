@@ -82,6 +82,7 @@ class _RegistrationScreenState extends State<RegistrationScreen>
         child: SingleChildScrollView(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               Container(
                 alignment: Alignment.centerLeft,
@@ -189,28 +190,31 @@ class _RegistrationScreenState extends State<RegistrationScreen>
                 ),
               ),
               SizedBox(height: size.height * 0.02),
-              DropdownButton<String>(
-                value: dropDownValue,
-                icon: Icon(Icons.arrow_drop_down),
-                iconSize: 24,
-                elevation: 16,
-                style: TextStyle(color: Colors.red, fontSize: 18),
-                underline: Container(
-                  height: 2,
-                  color: Colors.deepPurpleAccent,
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 22.0),
+                child: DropdownButton<String>(
+                  value: dropDownValue,
+                  icon: Icon(Icons.arrow_drop_down),
+                  iconSize: 24,
+                  elevation: 16,
+                  style: TextStyle(color: Colors.black87, fontSize: 18),
+                  underline: Container(
+                    height: 1,
+                    color: Colors.grey,
+                  ),
+                  onChanged: (data) {
+                    setState(() {
+                      dropDownValue = data!;
+                    });
+                  },
+                  items: LocalServices.spinnerItems
+                      .map<DropdownMenuItem<String>>((String value) {
+                    return DropdownMenuItem<String>(
+                      value: value,
+                      child: Text(value),
+                    );
+                  }).toList(),
                 ),
-                onChanged: (data) {
-                  setState(() {
-                    dropDownValue = data!;
-                  });
-                },
-                items: LocalServices.spinnerItems
-                    .map<DropdownMenuItem<String>>((String value) {
-                  return DropdownMenuItem<String>(
-                    value: value,
-                    child: Text(value),
-                  );
-                }).toList(),
               ),
               SizedBox(height: size.height * 0.05),
               Container(
@@ -229,6 +233,8 @@ class _RegistrationScreenState extends State<RegistrationScreen>
                     : ElevatedButton(
                         onPressed: () {
                           _mInputValidation();
+                          /* String s = MyServices.mEncode('Ab@c.d');
+                          print(s); */
                         },
                         style: ElevatedButton.styleFrom(
                           shape: RoundedRectangleBorder(
@@ -392,10 +398,10 @@ bool emailValid = RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-
         }) */
         ServicesFirestore.mSaveData(
                 userType: dropDownValue,
-                email: MyServices.mEncode(email) ,
+                email: MyServices.mEncode(email),
                 pass: MyServices.mEncode(pass),
                 username: MyServices.mEncode(username),
-                phone: MyServices.mEncode(phone),
+                phone: MyServices.mEncode('0'+phone),
                 userId: user.uid)
             .then((value) {
           print(ConstPrintColor.printGreen +

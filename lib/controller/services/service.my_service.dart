@@ -1,3 +1,5 @@
+// ignore_for_file: non_constant_identifier_names
+
 import 'package:intl/intl.dart';
 import 'package:my_hospital_app/model/consts/const.data.bn.dart';
 import 'package:my_hospital_app/model/data_model/model.ojon.dart';
@@ -33,7 +35,7 @@ class MyServices {
     for (var i = 97; i <= 122; i++) {
       LowerCharList.add(String.fromCharCode(i));
     }
-
+    
 //Encode
     for (var i = 0; i < orginalStr.length; i++) {
       String updatedSubStr = orginalStr[i];

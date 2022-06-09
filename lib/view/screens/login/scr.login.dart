@@ -29,12 +29,10 @@ class _LoginSceenState extends State<LoginSceen> with TickerProviderStateMixin {
   bool isEmail = true;
   bool isPass = true;
   bool isloading = false;
-  User? _user;
 
   @override
   void initState() {
     _mAuth = FirebaseAuth.instance;
-    _user = _mAuth.currentUser;
 
 /* //check if user logged in before
     _mAuth.authStateChanges().listen(
@@ -171,39 +169,36 @@ class _LoginSceenState extends State<LoginSceen> with TickerProviderStateMixin {
                                     strokeWidth: 2,
                                   ),
                                 )
-                              : Container(
-                                  // margin: EdgeInsets.only(top: 5),
-                                  child: ElevatedButton(
-                                    onPressed: () {
-                                      _mInputValidation();
-                                    },
-                                    style: ElevatedButton.styleFrom(
-                                      elevation: 5,
-                                      shape: RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(80.0)),
-                                      padding: const EdgeInsets.all(0),
-                                    ),
-                                    child: Container(
-                                      alignment: Alignment.center,
-                                      height: 40.0,
-                                      width: size.width * 0.4,
-                                      decoration: BoxDecoration(
-                                          borderRadius:
-                                              BorderRadius.circular(80.0),
-                                          gradient: LinearGradient(colors: [
-                                            /* Color.fromARGB(255, 255, 136, 34),
-                                      Color.fromARGB(255, 255, 177, 41) */
-                                            Colors.blue,
-                                            Colors.blueAccent,
-                                          ])),
-                                      padding: const EdgeInsets.all(0),
-                                      child: Text(
-                                        "LOGIN",
-                                        textAlign: TextAlign.center,
-                                        style: TextStyle(
-                                            fontWeight: FontWeight.bold),
-                                      ),
+                              : ElevatedButton(
+                                  onPressed: () {
+                                    _mInputValidation();
+                                  },
+                                  style: ElevatedButton.styleFrom(
+                                    elevation: 5,
+                                    shape: RoundedRectangleBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(80.0)),
+                                    padding: const EdgeInsets.all(0),
+                                  ),
+                                  child: Container(
+                                    alignment: Alignment.center,
+                                    height: 40.0,
+                                    width: size.width * 0.4,
+                                    decoration: BoxDecoration(
+                                        borderRadius:
+                                            BorderRadius.circular(80.0),
+                                        gradient: LinearGradient(colors: [
+                                          /* Color.fromARGB(255, 255, 136, 34),
+                                  Color.fromARGB(255, 255, 177, 41) */
+                                          Colors.blue,
+                                          Colors.blueAccent,
+                                        ])),
+                                    padding: const EdgeInsets.all(0),
+                                    child: Text(
+                                      "LOGIN",
+                                      textAlign: TextAlign.center,
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold),
                                     ),
                                   ),
                                 ),
@@ -336,16 +331,74 @@ class _LoginSceenState extends State<LoginSceen> with TickerProviderStateMixin {
       try {
         UserCredential authResult = await _mAuth.signInWithEmailAndPassword(
             email: email, password: pass);
-        _user = authResult.user;
-        String uid = _user!.uid;
+        /*  _user = authResult.user;
+        String uid = _user!.uid; */
+       String currentUserId = _mAuth.currentUser!.uid;
+       
         print(ConstPrintColor.printGreen +
             "Login Successfull" +
             ConstPrintColor.endColor);
         print(ConstPrintColor.printCyan +
-            authResult.toString() +
+            currentUserId+
             ConstPrintColor.endColor);
+                  //Check userType
+
+        ServicesFirestore.mGetUserType(currentUserId).then((value) {
+          
+          if (value == "Patient") {
+            Navigator.of(context)
+                .pushReplacement(MaterialPageRoute(builder: (context) {
+              return PatientHome(uid: currentUserId);
+            }));
+          } else if (value == "Doctor") {
+            Navigator.of(context)
+                .pushReplacement(MaterialPageRoute(builder: (context) {
+              return DoctorHome(userId: currentUserId);
+            }));
+          } else if (value == "Admin") {
+            Navigator.of(context)
+                .pushReplacement(MaterialPageRoute(builder: (context) {
+              return AdminHome(uid: currentUserId);
+            }));
+          } else if (value == "Nurse") {
+            Navigator.of(context)
+                .pushReplacement(MaterialPageRoute(builder: (context) {
+              return NurseHome(uId: currentUserId);
+            }));
+          } else {
+            print(value);
+          }
+        });
+
         /*  String? userType = ServicesFirestore.mCheckUserType(uid);
           print(userType);
+          _user!.emailVerified
+              ? Navigator.pushReplacement(context,
+                  MaterialPageRoute(builder: (context) {
+                  if (userType == ConstKeys.patient) {
+                    return PatientHome(uid: uid);
+                  } else if (userType == ConstKeys.doctor) {
+                    return DoctorHomeScreen(uId: uid);
+                  } else if (userType == ConstKeys.nurse) {
+                    return NurseHomeScreen(uId: uid);
+                  } else {
+                    return AdminHome(uid: uid);
+                  }
+
+                  // return AdminHome(uid: uid);
+                })
+                  /* PageTransition(
+                    duration: Duration(milliseconds: 300),
+                    child: AdminHome(
+                      uid: uid,
+                    ),
+                    type: PageTransitionType.leftToRight) */
+                  )
+              : _mGetMessage();
+        }); */
+        /* ServicesFirestore.mCheckUserType(uid).then((userType) {
+          print(userType);
+
           //Check userType
           _user!.emailVerified
               ? Navigator.pushReplacement(context,
@@ -371,34 +424,6 @@ class _LoginSceenState extends State<LoginSceen> with TickerProviderStateMixin {
                   )
               : _mGetMessage();
         }); */
-        ServicesFirestore.mCheckUserType(uid).then((userType) {
-          print(userType);
-
-          //Check userType
-          _user!.emailVerified
-              ? Navigator.pushReplacement(context,
-                  MaterialPageRoute(builder: (context) {
-                  if (userType == ConstKeys.patient) {
-                    return PatientHome(uid: uid);
-                  } else if (userType == ConstKeys.doctor) {
-                    return DoctorHomeScreen(uId: uid);
-                  } else if (userType == ConstKeys.nurse) {
-                    return NurseHomeScreen(uId: uid);
-                  } else {
-                    return AdminHome(uid: uid);
-                  }
-
-                  // return AdminHome(uid: uid);
-                })
-                  /* PageTransition(
-                    duration: Duration(milliseconds: 300),
-                    child: AdminHome(
-                      uid: uid,
-                    ),
-                    type: PageTransitionType.leftToRight) */
-                  )
-              : _mGetMessage();
-        });
       } on FirebaseException catch (e) {
         setState(() {
           isloading = false;

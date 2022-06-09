@@ -7,15 +7,15 @@ import 'package:my_hospital_app/controller/utils/util.custom_text.dart';
 import 'package:my_hospital_app/main.dart';
 import 'package:my_hospital_app/view/screens/login/scr.login.dart';
 
-class NurseHomeScreen extends StatefulWidget {
+class NurseHome extends StatefulWidget {
   final String uId;
-  const NurseHomeScreen({super.key, required this.uId});
+  const NurseHome({super.key, required this.uId});
 
   @override
-  State<NurseHomeScreen> createState() => _NurseHomeScreenState();
+  State<NurseHome> createState() => _NurseHomeState();
 }
 
-class _NurseHomeScreenState extends State<NurseHomeScreen> {
+class _NurseHomeState extends State<NurseHome> {
   late FirebaseAuth mAuth;
   @override
   void initState() {

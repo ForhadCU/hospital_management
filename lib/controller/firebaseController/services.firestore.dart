@@ -22,6 +22,31 @@ class ServicesFirestore {
   /*  static final DocumentReference adminDocRef =
       ServicesFirestore.collRefAdmin.doc(); */
 
+  static Future<String> mGetUserType(String userid) async {
+    FirebaseFirestore db =  FirebaseFirestore.instance;
+    //check only USER collection
+    QuerySnapshot<Map<String, dynamic>> querySnapshot =
+        await db.collection(ConstKeys.userCollRef).get();
+    String userType = '';
+    for (var element in querySnapshot.docs) {
+      if (element.get('userid') == userid) {
+        userType = element.get('userType');
+      }
+    }
+    return userType;
+    /* int i = 4;
+
+    if (i == 2) {
+      return "2";
+    } else if (i == 4) {
+      return "4";
+    } else if (i == 5) {
+      return "5";
+    } else {
+      return "0";
+    } */
+  }
+
   static Future<void> mUpdatePatientAppointment(
       String acceptStatus,
       String adminAppointmentId,
@@ -51,14 +76,14 @@ class ServicesFirestore {
 
   static Future<void> mSendNotiToDoctor(
       {required String doctUid,
-   required   String myUid,
-    required  String from,
-    required  String to,
-    required  String visitDate,
-    required  String scheduleId,
-    required  String sentDate,
-    required  String sentTime,
-    required  int dateTime}) async {
+      required String myUid,
+      required String from,
+      required String to,
+      required String visitDate,
+      required String scheduleId,
+      required String sentDate,
+      required String sentTime,
+      required int dateTime}) async {
     final FirebaseFirestore db = FirebaseFirestore.instance;
     NotificationModel model1 = NotificationModel(
         dateTime: dateTime,
@@ -405,16 +430,22 @@ class ServicesFirestore {
       required String username,
       required String phone,
       required userId}) async {
+    FirebaseFirestore db = FirebaseFirestore.instance;
+
+    await db
+        .collection(ConstKeys.userCollRef)
+        .add({'userid': userId, 'userType': userType});
+
     if (userType == (ConstKeys.admin)) {
       ServicesFirestore.collRefAdmin.add({
         /* ConstKeys.uKeyEmail: email,
           ConstKeys.uKeyPass: pass,
           ConstKeys.uKeyName: username,
           ConstKeys.uKeyPhone: phone, */
-        ConstKeys.uKeyEmail: MyServices.mEncode(email),
-        ConstKeys.uKeyPass: MyServices.mEncode(pass),
-        ConstKeys.uKeyName: MyServices.mEncode(username),
-        ConstKeys.uKeyPhone: MyServices.mEncode(phone),
+        ConstKeys.uKeyEmail: email,
+        ConstKeys.uKeyPass: pass,
+        ConstKeys.uKeyName: username,
+        ConstKeys.uKeyPhone: phone,
         ConstKeys.uCategory: userType,
         ConstKeys.uKeyUid: userId,
         ConstKeys.uKeyCreatedDate: DateTime.now().millisecondsSinceEpoch,
@@ -425,10 +456,10 @@ class ServicesFirestore {
           ConstKeys.uKeyPass: pass,
           ConstKeys.uKeyName: username,
           ConstKeys.uKeyPhone: phone, */
-        ConstKeys.uKeyEmail: MyServices.mEncode(email),
-        ConstKeys.uKeyPass: MyServices.mEncode(pass),
-        ConstKeys.uKeyName: MyServices.mEncode(username),
-        ConstKeys.uKeyPhone: MyServices.mEncode(phone),
+        ConstKeys.uKeyEmail: email,
+        ConstKeys.uKeyPass: pass,
+        ConstKeys.uKeyName: username,
+        ConstKeys.uKeyPhone: phone,
         ConstKeys.uCategory: userType,
         ConstKeys.uKeyUid: userId,
         ConstKeys.uKeyCreatedDate: DateTime.now().millisecondsSinceEpoch,
@@ -439,10 +470,10 @@ class ServicesFirestore {
           ConstKeys.uKeyPass: pass,
           ConstKeys.uKeyName: username,
           ConstKeys.uKeyPhone: phone, */
-        ConstKeys.uKeyEmail: MyServices.mEncode(email),
-        ConstKeys.uKeyPass: MyServices.mEncode(pass),
-        ConstKeys.uKeyName: MyServices.mEncode(username),
-        ConstKeys.uKeyPhone: MyServices.mEncode(phone),
+        ConstKeys.uKeyEmail: email,
+        ConstKeys.uKeyPass: pass,
+        ConstKeys.uKeyName: username,
+        ConstKeys.uKeyPhone: phone,
         ConstKeys.uCategory: userType,
         ConstKeys.uKeyUid: userId,
         ConstKeys.uKeyCreatedDate: DateTime.now().millisecondsSinceEpoch,
@@ -453,10 +484,10 @@ class ServicesFirestore {
           ConstKeys.uKeyPass: pass,
           ConstKeys.uKeyName: username,
           ConstKeys.uKeyPhone: phone, */
-        ConstKeys.uKeyEmail: MyServices.mEncode(email),
-        ConstKeys.uKeyPass: MyServices.mEncode(pass),
-        ConstKeys.uKeyName: MyServices.mEncode(username),
-        ConstKeys.uKeyPhone: MyServices.mEncode(phone),
+        ConstKeys.uKeyEmail: email,
+        ConstKeys.uKeyPass: pass,
+        ConstKeys.uKeyName: username,
+        ConstKeys.uKeyPhone: phone,
         ConstKeys.uCategory: userType,
         ConstKeys.uKeyUid: userId,
         ConstKeys.uKeyCreatedDate: DateTime.now().millisecondsSinceEpoch,
