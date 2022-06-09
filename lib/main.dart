@@ -8,6 +8,7 @@ import 'package:my_hospital_app/view/screens/login/scr.login.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:my_hospital_app/view/screens/patientHome/scr.patientHome.dart';
 import 'package:my_hospital_app/view/screens/patientHome/scr.patientHomeNew.dart';
+import 'package:my_hospital_app/view/screens/splash%20screen/scr.splash.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -39,7 +40,8 @@ class MyApp extends StatelessWidget {
           appointmentStatus: "appointmentStatus"), */
       // home:  AdminHome(uid: "",),
       // home:  PatientHome(uid: "",),
-      home: const LauncherScreen(),
+      home: const SplashScreen(),
+      // home: const LauncherScreen(),
     );
   }
 }

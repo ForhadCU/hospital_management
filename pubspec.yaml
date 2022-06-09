@@ -47,6 +47,8 @@ dependencies:
   syncfusion_flutter_charts: ^20.1.56
   getwidget: ^2.0.4
   animated_widgets: ^1.1.0
+  animations: ^2.0.3
+  # animations: ^2.0.3
 
 
 dev_dependencies:
