@@ -6,9 +6,11 @@ import 'package:my_hospital_app/controller/utils/util.my_scr_size.dart';
 import 'package:my_hospital_app/model/consts/const.colors.dart';
 import 'package:my_hospital_app/model/consts/const.data.bn.dart';
 import 'package:my_hospital_app/model/data_model/model.doctors.dart';
+import 'package:my_hospital_app/view/screens/doctor%20profile/scr.doctor_details.dart';
 import 'package:my_hospital_app/view/screens/patientHome/screens/addAppointments/widget/category.dart';
 import 'package:my_hospital_app/view/screens/patientHome/widgets/dlg_book_appointment.dart';
 import 'package:my_hospital_app/view/screens/patientHome/widgets/doctor_banner.dart';
+import 'package:page_transition/page_transition.dart';
 
 class AddAppointments extends StatefulWidget {
   const AddAppointments({super.key});
@@ -152,21 +154,19 @@ class _AddAppointmentsState extends State<AddAppointments> {
                                   callback: () {
                                     /* print(
                                         doctor.scheduleModelList![1].from); */
-                                    showDialog(
-                                        context: context,
-                                        builder: (context) {
-                                          return BookAppointmentDialog(
-                                            doct_uid: doctor.userid!,
-                                            scheduleModelList:
-                                                doctor.scheduleModelList!,
-                                            personName: doctor.name!,
-                                            gmail: doctor.email!,
-                                            rating: doctor.rating!,
-                                            consultationFee:
-                                                "${index * 10 + 60}\$",
-                                            category: doctor.category!,
-                                          );
-                                        });
+                                    Navigator.of(context).push(PageTransition(
+                                        child: DoctorDetails(
+                                          /* scheduleModelList:
+                                              doctor.scheduleModelList!, */
+                                          doct_uid: doctor.userid!,
+                                          personName: doctor.name!,
+                                          gmail: doctor.email!,
+                                          rating: doctor.rating!,
+                                          consultationFee:
+                                              "${index * 10 + 60}\$",
+                                          category: doctor.category!,
+                                        ),
+                                        type: PageTransitionType.bottomToTop));
                                   },
                                   name: doctor.name!,
                                   category: doctor.category!,

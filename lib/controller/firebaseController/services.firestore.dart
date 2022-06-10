@@ -23,7 +23,7 @@ class ServicesFirestore {
       ServicesFirestore.collRefAdmin.doc(); */
 
   static Future<String> mGetUserType(String userid) async {
-    FirebaseFirestore db =  FirebaseFirestore.instance;
+    FirebaseFirestore db = FirebaseFirestore.instance;
     //check only USER collection
     QuerySnapshot<Map<String, dynamic>> querySnapshot =
         await db.collection(ConstKeys.userCollRef).get();
@@ -44,6 +44,45 @@ class ServicesFirestore {
       return "5";
     } else {
       return "0";
+    } */
+  }
+
+  static Future<void> mUpdateDoctorCollection() async {
+    FirebaseFirestore db = FirebaseFirestore.instance;
+
+    QuerySnapshot<Map<String, dynamic>> querySnapshot =
+        await db.collection('DOCTOR').get();
+    print(querySnapshot.docs.length);
+
+    for (var item in querySnapshot.docs) {
+      db.collection('DOCTOR').doc(item.id).collection('Schedules').add(
+          {'from': '07:00 PM', 'status': true, 'to': '07:30 PM'}).then((value) {
+        db
+            .collection('DOCTOR')
+            .doc(item.id)
+            .collection('Schedules')
+            .doc(value.id)
+            .update({'schedule_id': value.id});
+      });
+    }
+
+    //delete specific collection all data
+    /*  for (var item in querySnapshot.docs) {
+      db
+          .collection('DOCTOR')
+          .doc(item.id)
+          .collection('Schedules')
+          .get()
+          .then((value) {
+        for (var element in value.docs) {
+          db
+              .collection('DOCTOR')
+              .doc(item.id)
+              .collection('Schedules')
+              .doc(element.id)
+              .delete();
+        }
+      });
     } */
   }
 
@@ -462,6 +501,7 @@ class ServicesFirestore {
         ConstKeys.uKeyPhone: phone,
         ConstKeys.uCategory: userType,
         ConstKeys.uKeyUid: userId,
+        'rating': '4.2',
         ConstKeys.uKeyCreatedDate: DateTime.now().millisecondsSinceEpoch,
       });
     } else if (userType == (ConstKeys.patient)) {

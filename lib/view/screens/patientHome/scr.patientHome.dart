@@ -4,6 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:my_hospital_app/controller/firebaseController/services.firestore.dart';
+import 'package:my_hospital_app/controller/services/service.my_service.dart';
 import 'package:my_hospital_app/controller/utils/util.custom_statusbar.dart';
 import 'package:my_hospital_app/controller/utils/util.custom_text.dart';
 import 'package:my_hospital_app/controller/utils/util.my_scr_size.dart';
@@ -60,7 +61,12 @@ class _PatientHomeState extends State<PatientHome> {
                       fontsize: 16,
                     )),
               ),
-              UserBanner.userBanner(name: "Patient"),
+              InkWell(
+                  onTap: () {
+                    // print('object');
+                    ServicesFirestore.mUpdateDoctorCollection();
+                  },
+                  child: UserBanner.userBanner(name: "Patient")),
             ],
           ),
           SizedBox(

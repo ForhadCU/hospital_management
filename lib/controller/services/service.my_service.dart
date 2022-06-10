@@ -5,6 +5,10 @@ import 'package:my_hospital_app/model/consts/const.data.bn.dart';
 import 'package:my_hospital_app/model/data_model/model.ojon.dart';
 
 class MyServices {
+
+  
+
+
   static String mGetCurrentTime() {
     DateTime d = DateTime.now();
     String s = DateFormat('hh:mm a').format(d);

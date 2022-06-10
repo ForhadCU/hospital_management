@@ -1,15 +1,11 @@
-import 'dart:ffi';
-
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:my_hospital_app/controller/firebaseController/services.firestore.dart';
 import 'package:my_hospital_app/view/screens/adminHome/scr.adminHome.dart';
 import 'package:my_hospital_app/view/screens/doctorHome/scr.doctorHome.dart';
-import 'package:my_hospital_app/view/screens/login/scr.login.dart';
 import 'package:my_hospital_app/view/screens/nurseHome/scr.nurseHome.dart';
 import 'package:my_hospital_app/view/screens/patientHome/scr.patientHome.dart';
-import 'package:my_hospital_app/view/widgets/dot_blink_loader.dart';
-import 'package:syncfusion_flutter_charts/charts.dart';
+import 'package:my_hospital_app/view/screens/splash%20screen/scr.splash.dart';
 
 class LauncherScreen extends StatefulWidget {
   const LauncherScreen({super.key});
@@ -27,7 +23,7 @@ class _LauncherScreenState extends State<LauncherScreen> {
     // TODO: implement initState
     super.initState();
     _auth = FirebaseAuth.instance;
-    Future.delayed(const Duration(milliseconds: 3000)).then((value) async {
+    Future.delayed(const Duration(milliseconds: 4500)).then((value) async {
       if (_auth.currentUser != null) {
         //signed in
         print('Signed in');
@@ -63,7 +59,7 @@ class _LauncherScreenState extends State<LauncherScreen> {
 
         Navigator.of(context)
             .pushReplacement(MaterialPageRoute(builder: (context) {
-          return const LoginSceen();
+          return const SplashScreen();
         }));
       }
     });
@@ -72,9 +68,11 @@ class _LauncherScreenState extends State<LauncherScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       body: isChecking
           ? const Center(
-              child: DotBlickLoader(),
+              child: Image(image: AssetImage('lib/assets/gif_loading1.gif')),
+              // child: DotBlickLoader(),
             )
           : const Center(
               child: Text('Checked'),

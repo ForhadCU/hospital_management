@@ -40,8 +40,8 @@ class MyApp extends StatelessWidget {
           appointmentStatus: "appointmentStatus"), */
       // home:  AdminHome(uid: "",),
       // home:  PatientHome(uid: "",),
-      home: const SplashScreen(),
-      // home: const LauncherScreen(),
+      // home: const SplashScreen(),
+      home: const LauncherScreen(),
     );
   }
 }

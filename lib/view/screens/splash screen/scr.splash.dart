@@ -1,7 +1,9 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:flutter/material.dart';
 import 'package:my_hospital_app/controller/utils/util.custom_statusbar.dart';
 import 'package:my_hospital_app/view/screens/register/scr.registration.dart';
-import 'package:my_hospital_app/view/screens/splash%20screen/widget/login_reg_view.dart';
+import 'package:page_transition/page_transition.dart';
 
 import 'widget/care_view.dart';
 import 'widget/center_next_button.dart';
@@ -121,8 +123,17 @@ class _SplashScreenState extends State<SplashScreen>
 
   void _signUpClick() {
     // Navigator.pop(context);
-    Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) {
+    Navigator.push(
+        context,
+        PageTransition(
+            duration: Duration(milliseconds: 1500),
+            child: RegistrationScreen(),
+            type: PageTransitionType.rightToLeftWithFade));
+    PageTransition(
+        type: PageTransitionType.rightToLeftWithFade,
+        child: RegistrationScreen());
+    /*  Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) {
       return RegistrationScreen();
-    }));
+    })); */
   }
 }

@@ -30,6 +30,13 @@ class MyData {
     "Cardiologist",
     "Nutritionist"
   ];
+  static const List<String> weekList = [
+    'Sunday',
+    'Monday',
+    'Tuesday',
+    'Wednessday',
+    'Thursday'
+  ];
   static const List<double> sWidthlist = [37.6, 10.2, 6.5];
   static const List<double> s2Widthlist = [
     2.2,

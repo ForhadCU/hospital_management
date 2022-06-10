@@ -15,7 +15,7 @@ class BookAppointmentDialog extends StatefulWidget {
   final String personName;
   final String gmail;
   final String rating;
-  final List<ScheduleModel> scheduleModelList;
+  // final List<ScheduleModel> scheduleModelList;
   final String consultationFee;
   final String category;
   final String doct_uid;
@@ -25,7 +25,7 @@ class BookAppointmentDialog extends StatefulWidget {
       required this.doct_uid,
       required this.category,
       required this.consultationFee,
-      required this.scheduleModelList,
+      // required this.scheduleModelList,
       required this.personName,
       required this.gmail,
       required this.rating});

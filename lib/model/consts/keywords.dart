@@ -47,7 +47,7 @@ class ConstKeys {
   static const String uKeyPass = "password";
   static const String uKeyPhone = "phone";
   static const String uKeyUid = "userid";
-  static const String uCategory = "urercategory";
+  static const String uCategory = "category";
 
   static const String teamCollRef = "TEAMS";
 
