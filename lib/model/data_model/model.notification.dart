@@ -13,12 +13,12 @@ class NotificationModel {
   String? patientAppnointmentId;
   String? acceptStatus;
   String? doc_id;
+  bool? remainder;
 
   NotificationModel(
-      {
-        
-        this.readStatus,
-        this.doc_id,
+      {this.remainder,
+      this.readStatus,
+      this.doc_id,
       this.acceptStatus,
       this.patientAppnointmentId,
       this.doctUid,
@@ -47,6 +47,7 @@ class NotificationModel {
     patientAppnointmentId = map['patientAppnointmentId'];
     acceptStatus = map['acceptStatus'];
     doc_id = map['doc_id'];
+    remainder = map['createdDateTime'];
   }
 
   Map<String, dynamic> toMap() {
@@ -65,6 +66,7 @@ class NotificationModel {
     map['patientAppnointmentId'] = patientAppnointmentId;
     map['acceptStatus'] = acceptStatus;
     map['doc_id'] = doc_id;
+    map['createdDateTime'] = remainder;
 
     return map;
   }

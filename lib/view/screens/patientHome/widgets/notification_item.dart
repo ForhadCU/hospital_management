@@ -1,10 +1,12 @@
 // ignore_for_file: prefer_const_constructors
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:my_hospital_app/controller/utils/util.custom_text.dart';
 import 'package:my_hospital_app/model/consts/const.colors.dart';
 import 'package:my_hospital_app/view/widgets/my_widgets.dart';
 
-class AdminNotiItem extends StatelessWidget {
+class PatientNotiItem extends StatelessWidget {
   final String name;
   final String appointmentId;
   final String gender;
@@ -15,7 +17,7 @@ class AdminNotiItem extends StatelessWidget {
   final String appointmentType;
   final String appointmentStatus;
   final Function callback;
-  const AdminNotiItem(
+  const PatientNotiItem(
       {super.key,
       required this.callback,
       required this.name,
@@ -46,9 +48,17 @@ class AdminNotiItem extends StatelessWidget {
             )
           ]),
           child: Column(mainAxisSize: MainAxisSize.min, children: [
-           
+            SizedBox(
+              height: 5,
+            ),
             Row(
-              children: const [CustomText(text: 'You have recieved a new notification.')],
+              children: [
+                appointmentStatus == 'Pending'
+                    ? CustomText(text: 'Your appointment is pending.')
+                    : appointmentStatus == 'Reject'
+                        ? CustomText(text: 'Your appointment is rejected.')
+                        : CustomText(text: 'Your appointment is confirmed.')
+              ],
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.end,

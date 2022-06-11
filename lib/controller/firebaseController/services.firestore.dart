@@ -22,6 +22,21 @@ class ServicesFirestore {
   /*  static final DocumentReference adminDocRef =
       ServicesFirestore.collRefAdmin.doc(); */
 
+  static Future<String> mGetDocId(String uid) async {
+    FirebaseFirestore db = FirebaseFirestore.instance;
+    String docId = '';
+    /*    QuerySnapshot<Map<String, dynamic>> querySnapshot = */
+    await db.collection(ConstKeys.patientCollRef).get().then((value) {
+      for (var element in value.docs) {
+        if (element.get('userid') == uid) {
+          docId = element.id;
+        }
+      }
+    });
+
+    return docId;
+  }
+
   static Future<Map<String, dynamic>> mGetUserInfo(String uid) async {
     FirebaseFirestore db = FirebaseFirestore.instance;
     QuerySnapshot<Map<String, dynamic>> querySnapshot =
@@ -30,14 +45,62 @@ class ServicesFirestore {
     String name = '';
     String email = '';
     String phone = '';
+    String docId = '';
     for (var element in querySnapshot.docs) {
       if (element.get('userid') == uid) {
         name = element.get('name');
         email = element.get('email');
         phone = element.get('phone');
+        docId = element.id;
       }
     }
-    return {'name': MyServices.mDecode(name), 'email': MyServices.mDecode(email), 'phone': phone};
+    return {
+      'name': MyServices.mDecode(name),
+      'email': MyServices.mDecode(email),
+      'phone': phone,
+      'docId': docId
+    };
+  }
+
+  static Future<void> mCheckRemainders({required String uid}) async {
+    FirebaseFirestore db = FirebaseFirestore.instance;
+    print('called');
+    QuerySnapshot<Map<String, dynamic>> querySnapshot =
+        await db.collection(ConstKeys.patientCollRef).get();
+    for (var element in querySnapshot.docs) {
+      if (element.get('userid') == uid) {
+        QuerySnapshot<Map<String, dynamic>> querySnapshot1 = await db
+            .collection(ConstKeys.patientCollRef)
+            .doc(element.id)
+            .collection(ConstKeys.appointments)
+            .get();
+        for (var element1 in querySnapshot1.docs) {
+          // print(element.get('acceptStatus'));
+          if (element1.get('acceptStatus') == 'Confirm' &&
+                  MyServices.mGetCurrentDate() == element1.get('visitDate') &&
+                  element1.get('remainder') == false
+              /*  DateTime.now()
+                        .difference(DateTime.fromMillisecondsSinceEpoch(
+                            element.get('dateTime')))
+                        .inMinutes <=
+                    2 &&  DateTime.now()
+                        .difference(DateTime.fromMillisecondsSinceEpoch(
+                            element.get('dateTime')))
+                        .inMinutes >=
+                    0 */
+              ) {
+            await db
+                .collection(ConstKeys.patientCollRef)
+                .doc(element.id)
+                .collection(ConstKeys.appointments)
+                .doc(element1.id)
+                .update({'remainder': true, 'readStatus': 'unread'});
+          } else {
+            print('not found!');
+          }
+        }
+      }
+    }
   }
 
   static Future<void> mUpdatePatientData(
@@ -126,6 +189,7 @@ class ServicesFirestore {
       String adminAppointmentId,
       String patientDocId,
       String patientAppointmentId) async {
+    print("patientDocId: $patientDocId");
     FirebaseFirestore db = FirebaseFirestore.instance;
     await db
         .collection(ConstKeys.patientCollRef)
@@ -221,6 +285,7 @@ class ServicesFirestore {
   static Future<void> mAppointmentReq(
       String doctUid,
       String myUid,
+      String senderDocId,
       String from,
       String to,
       String visitDate,
@@ -234,7 +299,7 @@ class ServicesFirestore {
         from: from,
         to: to,
         visitDate: visitDate,
-        senderUid: myUid,
+        senderUid: senderDocId,
         doctUid: doctUid,
         sentDate: sentDate,
         sentTime: sentTime,
@@ -242,6 +307,7 @@ class ServicesFirestore {
         readStatus: 'unread',
         patientAppnointmentId: '',
         acceptStatus: 'Pending',
+        remainder: false,
         notifId: '');
     String? patientAppointmentId;
     String? docId;
@@ -275,7 +341,7 @@ class ServicesFirestore {
         from: from,
         to: to,
         visitDate: visitDate,
-        senderUid: myUid,
+        senderUid: senderDocId,
         doctUid: doctUid,
         sentDate: sentDate,
         sentTime: sentTime,
@@ -290,12 +356,14 @@ class ServicesFirestore {
         .doc(ConstKeys.adminDocId)
         .collection(ConstKeys.appointments)
         .add(model2.toMap())
-        .then((value) => db
-            .collection(ConstKeys.adminCollRef)
-            .doc(ConstKeys.adminDocId)
-            .collection(ConstKeys.appointments)
-            .doc(value.id)
-            .update({'notifId': value.id}));
+        .then((value) {
+      return db
+          .collection(ConstKeys.adminCollRef)
+          .doc(ConstKeys.adminDocId)
+          .collection(ConstKeys.appointments)
+          .doc(value.id)
+          .update({'notifId': value.id});
+    });
 
     //notification
     await db

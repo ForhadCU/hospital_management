@@ -18,8 +18,7 @@ class BookAppointmentDialog extends StatefulWidget {
   final String consultationFee;
   final String category;
   final String doct_uid;
-  final String uid; 
-
+  final String uid;
 
   const BookAppointmentDialog(
       {super.key,
@@ -45,7 +44,7 @@ class _BookAppointmentDialogState extends State<BookAppointmentDialog> {
   String from = '';
   String to = '';
   String scheduleId = '';
-  String senderUid = '';
+  String senderDocid = '';
   String sentDate = '';
   String sentTime = '';
   String visitDate = '';
@@ -59,6 +58,11 @@ class _BookAppointmentDialogState extends State<BookAppointmentDialog> {
     scheduleModelList = [];
     isRequestingAppointment = false;
     myUid = widget.uid;
+    ServicesFirestore.mGetDocId(widget.uid).then((value) {
+      setState(() {
+        senderDocid = value;
+      });
+    });
     //call getSche method,
     ServicesFirestore.mFetchSchedules(widget.doct_uid, startDateStr)
         .then((value) {
@@ -328,6 +332,8 @@ class _BookAppointmentDialogState extends State<BookAppointmentDialog> {
                                 ServicesFirestore.mAppointmentReq(
                                         widget.doct_uid,
                                         myUid,
+
+                                        senderDocid,
                                         from,
                                         to,
                                         visitDate,
@@ -358,7 +364,6 @@ class _BookAppointmentDialogState extends State<BookAppointmentDialog> {
                                 ? Row(
                                     children: [
                                       DotBlickLoader(),
-                                      
                                     ],
                                   )
                                 : Container(

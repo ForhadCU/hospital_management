@@ -1,22 +1,25 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-
 import 'package:getwidget/getwidget.dart';
 import 'package:my_hospital_app/controller/firebaseController/services.firestore.dart';
-import 'package:my_hospital_app/controller/services/service.my_service.dart';
 import 'package:my_hospital_app/controller/utils/util.custom_statusbar.dart';
 import 'package:my_hospital_app/controller/utils/util.custom_text.dart';
 import 'package:my_hospital_app/model/consts/const.colors.dart';
 import 'package:my_hospital_app/model/consts/keywords.dart';
 import 'package:my_hospital_app/view/screens/adminHome/screen/appointment/widget/appointment_item.dart';
-import 'package:my_hospital_app/view/screens/adminHome/screen/notifiaction/widget/noti_item.dart';
+import 'package:my_hospital_app/view/screens/patientHome/widgets/item_appointment.dart';
 
-class AdminAppointmentScreen extends StatefulWidget {
+class PatientAppointmentScreen extends StatefulWidget {
+  final String docId;
+  PatientAppointmentScreen({required this.docId});
   @override
-  _AdminAppointmentScreenState createState() => _AdminAppointmentScreenState();
+  _PatientAppointmentScreenState createState() =>
+      _PatientAppointmentScreenState();
 }
 
-class _AdminAppointmentScreenState extends State<AdminAppointmentScreen> {
+class _PatientAppointmentScreenState extends State<PatientAppointmentScreen> {
   double height = 160;
   var _chatScrollController;
   int noticeNum = 10; // at first it will load only 10
@@ -46,7 +49,6 @@ class _AdminAppointmentScreenState extends State<AdminAppointmentScreen> {
 
   @override
   void dispose() {
-    // TODO: implement dispose
     super.dispose();
   }
 
@@ -63,16 +65,16 @@ class _AdminAppointmentScreenState extends State<AdminAppointmentScreen> {
       },
       child: Scaffold(
         appBar: AppBar(
-            backgroundColor: MyColors.c3,
+          backgroundColor: MyColors.c3,
             title: CustomText(
-              text: "Appointments",
-              fontWeight: FontWeight.w400,
-              fontsize: 22,
-            )),
+          text: "Appointments",
+          fontWeight: FontWeight.w400,
+          fontsize: 22,
+        )),
         body: StreamBuilder<QuerySnapshot>(
             stream: FirebaseFirestore.instance
-                .collection(ConstKeys.adminCollRef)
-                .doc('gEmAMDRZYXtkJOklftDk')
+                .collection(ConstKeys.patientCollRef)
+                .doc(widget.docId)
                 .collection(ConstKeys.appointments)
                 .orderBy('dateTime', descending: true)
                 .limit(noticeNum)
@@ -91,40 +93,18 @@ class _AdminAppointmentScreenState extends State<AdminAppointmentScreen> {
                 physics: BouncingScrollPhysics(),
                 itemCount: myData.size,
                 itemBuilder: (bcontext, index) {
-                  return AdminAppointmentItem(
-                      name: myData.docs[index]['doctUid'],
+                  return PatientAppointmentItem(
+                       name: myData.docs[index]['doctUid'],
                       appointmentId: "appointmentId",
                       gender: "gender",
                       age: "age",
                       mobile: "mobile",
                       appointementDate: myData.docs[index]['visitDate'],
-                      appointmentTime: myData.docs[index]['from'] +
-                          ' - ' +
-                          myData.docs[index]['to'],
+                      appointmentTime: myData.docs[index]['from']+' - ' + myData.docs[index]['to'],
                       appointmentType: "appointmentType",
                       appointmentStatus: "appointmentStatus",
                       acceptStatus: myData.docs[index]['acceptStatus'],
-                      callback: (String acceptStatus) async {
-                        if (acceptStatus != 'Reject') {
-                          ServicesFirestore.mSendNotiToDoctor(
-                              doctUid: myData.docs[index]['doctUid'],
-                              myUid: myData.docs[index]
-                                  ['patientAppnointmentId'],
-                              from: myData.docs[index]['from'],
-                              to: myData.docs[index]['to'],
-                              visitDate: myData.docs[index]['visitDate'],
-                              scheduleId: myData.docs[index]['scheduleId'],
-                              sentDate: myData.docs[index]['sentDate'],
-                              sentTime: myData.docs[index]['sentTime'],
-                              dateTime: myData.docs[index]['dateTime']);
-                        }
-                        ServicesFirestore.mUpdatePatientAppointment(
-                            acceptStatus,
-                            myData.docs[index].id,
-                            myData.docs[index]['senderUid'],
-                            myData.docs[index]['patientAppnointmentId']);
-                        setState(() {});
-                      });
+                      callback: () { });
                 },
               );
             }),

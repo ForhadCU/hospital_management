@@ -5,7 +5,7 @@ import 'package:my_hospital_app/controller/utils/util.custom_text.dart';
 import 'package:my_hospital_app/model/consts/const.colors.dart';
 import 'package:my_hospital_app/view/widgets/my_widgets.dart';
 
-class AdminAppointmentItem extends StatelessWidget {
+class PatientAppointmentItem extends StatelessWidget {
   final String name;
   final String appointmentId;
   final String gender;
@@ -17,7 +17,7 @@ class AdminAppointmentItem extends StatelessWidget {
   final String appointmentStatus;
   final Function callback;
   final String acceptStatus;
-  const AdminAppointmentItem(
+  const PatientAppointmentItem(
       {super.key,
       required this.acceptStatus,
       required this.callback,
@@ -47,7 +47,7 @@ class AdminAppointmentItem extends StatelessWidget {
         child: Column(mainAxisSize: MainAxisSize.min, children: [
           SizedBox(height: 4,)
           ,
-          Row(
+           Row(
             children: [
               CustomText(
                 text: 'Dr. Ayesha Akter',
@@ -69,12 +69,12 @@ class AdminAppointmentItem extends StatelessWidget {
                 color: Colors.black12,
               )),
               SizedBox(
-                height: 10,
+                height: 16,
               ),
-             
+              
             ],
           ),
-          MyWidgets.widget_1(value: 'Patient 1', key: 'From'),
+           MyWidgets.widget_1(value: 'Patient 1', key: 'From'),
           MyWidgets.widget_1(value: 'female', key: 'Gender'),
           MyWidgets.widget_1(value: '28', key: 'Age'),
           MyWidgets.widget_1(value: '01819673265', key: 'Mobile Number'),
@@ -83,43 +83,9 @@ class AdminAppointmentItem extends StatelessWidget {
           MyWidgets.widget_1(
               value: acceptStatus, key: 'Appointment Status'),
           SizedBox(
-            height: 14,
+            height: 10,
           ),
-          acceptStatus == 'Pending'
-              ? Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    ElevatedButton(
-                        onPressed: () {
-                          callback('Reject');
-                        },
-                        style: ElevatedButton.styleFrom(
-                            primary: Colors.red,
-                            elevation: 4,
-                            shadowColor: Colors.black26,
-                            padding: EdgeInsets.all(2)),
-                        child: CustomText(
-                          text: "Reject",
-                          fontWeight: FontWeight.w400,
-                          fontcolor: MyColors.textOnPrimary,
-                        )),
-                    ElevatedButton(
-                        onPressed: () {
-                          callback('Confirm');
-                        },
-                        style: ElevatedButton.styleFrom(
-                            primary: Colors.green,
-                            elevation: 4,
-                            shadowColor: Colors.black26,
-                            padding: EdgeInsets.all(2)),
-                        child: CustomText(
-                          text: "Confirm",
-                          fontWeight: FontWeight.w400,
-                          fontcolor: MyColors.textOnPrimary,
-                        )),
-                  ],
-                )
-              : Container(),
+       
         ]),
       ),
     );

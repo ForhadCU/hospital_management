@@ -1,4 +1,4 @@
-// ignore_for_file: avoid_unnecessary_containers, prefer_const_constructors, prefer_const_literals_to_create_immutables
+// ignore_for_file: avoid_unnecessary_containers, prefer_const_constructors, prefer_const_literals_to_create_immutables, sort_child_properties_last
 import 'package:animated_widgets/animated_widgets.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -119,61 +119,8 @@ class _AdminHomeState extends State<AdminHome> {
                         imageUrl: 'lib/assets/ic_person.png',
                         title: "My Profile"),
                   ),
-                  IconAndText.iconAndText(
-                      imageUrl: 'lib/assets/ic_history.png',
-                      title: "Medical Records"),
-                ],
-              ),
-              SizedBox(
-                height: 14,
-              ),
-              Divider(
-                height: 1,
-                thickness: 2,
-                color: MyColors.app2,
-              ),
 
-              //Wallpaper
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Image(
-                    image: AssetImage('lib/assets/admin_banner.jpg'),
-                    height: MyScreenSize.mGetHeight(context, 30),
-                    width: MyScreenSize.mGetWidth(context, 100),
-                    fit: BoxFit.fill,
-                  )
-                ],
-              ),
-
-              Divider(
-                height: 1,
-                thickness: 2,
-                color: MyColors.app2,
-              ),
-              SizedBox(
-                height: 16,
-              ),
-              //Bottom Modules
-              //1
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  Expanded(
-                    child: InkWell(
-                      onTap: () {
-                        print("Clicked");
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => AdminAppointmentScreen()));
-                      },
-                      child: IconAndText.iconAndText(
-                          imageUrl: 'lib/assets/appointments.png',
-                          title: "Appointments"),
-                    ),
-                  ),
-                  ShakeAnimatedWidget(
+                    ShakeAnimatedWidget(
                     enabled: counter > 0 ? true : false,
                     duration: Duration(milliseconds: 2000),
                     shakeAngle: Rotation.deg(z: 15),
@@ -201,6 +148,66 @@ class _AdminHomeState extends State<AdminHome> {
                       ),
                     ),
                   ),
+               
+                ],
+              ),
+              SizedBox(
+                height: 14,
+              ),
+             /*  Divider(
+                height: 1,
+                thickness: 2,
+                color: MyColors.app2,
+              ), */
+
+              //Wallpaper
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Image(
+                    image: AssetImage('lib/assets/gif_admin.gif'),
+                    height: MyScreenSize.mGetHeight(context, 35),
+                    width: MyScreenSize.mGetWidth(context, 100),
+                    fit: BoxFit.fill,
+                  )
+                ],
+              ),
+
+             /*  Divider(
+                height: 1,
+                thickness: 2,
+                color: MyColors.app2,
+              ), */
+              SizedBox(
+                height: 16,
+              ),
+              //Bottom Modules
+              //1
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  Expanded(
+                    child: InkWell(
+                      onTap: () {
+                        print("Clicked");
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => AdminAppointmentScreen()));
+                      },
+                      child: IconAndText.iconAndText(
+                          imageUrl: 'lib/assets/appointments.png',
+                          title: "Appointments"),
+                    ),
+                  ),
+                
+   IconAndText.iconAndText(
+                      imageUrl: 'lib/assets/ic_history.png',
+                      title: "Medical Records"),
+
+
+
+
                   /*  Expanded(
                     child: InkWell(
                       onTap: () {
