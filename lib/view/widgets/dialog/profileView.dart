@@ -17,7 +17,8 @@ class MyProfileDialog extends StatelessWidget {
   Widget build(BuildContext context) {
     return Dialog(
       child: Container(
-        padding: EdgeInsets.symmetric(horizontal: 14, vertical: 10),
+        // padding: EdgeInsets.symmetric(horizontal: 14, vertical: 24),
+        padding: EdgeInsets.only(right: 14, left: 14, bottom: 24, top: 12),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           mainAxisSize: MainAxisSize.min,

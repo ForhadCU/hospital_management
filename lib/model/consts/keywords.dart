@@ -7,7 +7,8 @@ class ConstKeys {
   static const String adminCollRef = "ADMINS";
   static const String adminDocId = "gEmAMDRZYXtkJOklftDk";
   static const String patientDocId = "a7psj74icnNIJsCZGShG";
-  static const String doctorCollRef = "DOCTORS";
+  // static const String doctorCollRef = "DOCTORS";
+  static const String doctorCollRef = "DOCTOR";
   static const String patientCollRef = "PATIENTS";
   static const String nurseCollRef = "NURSES";
   static const String doctor = "Doctor";

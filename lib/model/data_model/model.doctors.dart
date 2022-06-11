@@ -34,11 +34,20 @@ class Doctor {
  */
   Doctor.fromMap(Map<String, dynamic> map) {
     userid = map['userid'];
+    name = map['Name'];
+    category = map['Qualification'];
+    rating = map['Rating'];
+    email = map['Email'];
+    schedule_start = map['schedule_start'];
+    schedule_end = map['schedule_end'];
+  }
+  /* Doctor.fromMap(Map<String, dynamic> map) {
+    userid = map['userid'];
     name = map['name'];
     category = map['category'];
     rating = map['rating'];
     email = map['email'];
     schedule_start = map['schedule_start'];
     schedule_end = map['schedule_end'];
-  }
+  } */
 }

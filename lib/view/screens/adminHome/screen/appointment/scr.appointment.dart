@@ -70,7 +70,7 @@ class _AdminAppointmentScreenState extends State<AdminAppointmentScreen> {
         body: StreamBuilder<QuerySnapshot>(
             stream: FirebaseFirestore.instance
                 .collection(ConstKeys.adminCollRef)
-                .doc('gEmAMDRZYXtkJOklftDk')
+                .doc('gEmAMDRZYXtkJOklftDk') 
                 .collection(ConstKeys.appointments)
                 .orderBy('dateTime', descending: true)
                 .limit(noticeNum)
@@ -117,9 +117,11 @@ class _AdminAppointmentScreenState extends State<AdminAppointmentScreen> {
                         ServicesFirestore.mUpdatePatientAppointment(
                             acceptStatus,
                             myData.docs[index].id,
-                            ConstKeys.patientDocId,
+                            myData.docs[index]['senderUid'],
                             myData.docs[index]['patientAppnointmentId']);
-                        setState(() {});
+                        setState(() {
+                          
+                        });
                       });
                 },
               );

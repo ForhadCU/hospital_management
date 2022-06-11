@@ -1,14 +1,18 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, non_constant_identifier_names, prefer_const_constructors_in_immutables, sort_child_properties_last
 
 import 'package:flutter/material.dart';
+import 'package:my_hospital_app/controller/services/service.my_service.dart';
+import 'package:my_hospital_app/controller/utils/util.my_scr_size.dart';
 import 'package:my_hospital_app/model/consts/AllText.dart';
 import 'package:my_hospital_app/model/consts/const.colors.dart';
 import 'package:my_hospital_app/model/consts/const.data.bn.dart';
 import 'package:my_hospital_app/view/screens/patientHome/widgets/dlg_book_appointment.dart';
+import 'package:my_hospital_app/view/screens/patientHome/widgets/dlg_review.dart';
 
 import 'screen/review.dart';
 
 class DoctorDetails extends StatefulWidget {
+  final String uid;
   final String doct_uid;
   final String personName;
   final String gmail;
@@ -18,7 +22,9 @@ class DoctorDetails extends StatefulWidget {
   // final List<ScheduleModel> scheduleModelList;
 
   DoctorDetails(
-      {required this.doct_uid,
+      {
+        required this.uid,
+        required this.doct_uid,
       required this.category,
       required this.consultationFee,
       required this.personName,
@@ -34,6 +40,8 @@ class _DoctorDetailsState extends State<DoctorDetails> {
   bool isLoggedIn = true;
   bool isFethingDetails = false;
   double rating = 4.0;
+  int selectedRating = 0;
+  String review = "";
 
   @override
   void initState() {
@@ -56,8 +64,7 @@ class _DoctorDetailsState extends State<DoctorDetails> {
               backgroundColor: Colors.white,
               appBar: AppBar(
                 leading: Container(),
-                backgroundColor: MyColors.c3
-                ,
+                backgroundColor: MyColors.c3,
                 flexibleSpace: header(),
               ),
               body: body(),
@@ -250,7 +257,7 @@ class _DoctorDetailsState extends State<DoctorDetails> {
                                 width: 5,
                               ),
                               Image.asset(
-                                 double.parse(widget.rating) > 2
+                                double.parse(widget.rating) > 2
                                     ? "lib/assets/star_active.png"
                                     : "lib/assets/star_unactive.png",
                                 height: 12,
@@ -260,7 +267,7 @@ class _DoctorDetailsState extends State<DoctorDetails> {
                                 width: 5,
                               ),
                               Image.asset(
-                                 double.parse(widget.rating) > 3
+                                double.parse(widget.rating) > 3
                                     ? "lib/assets/star_active.png"
                                     : "lib/assets/star_unactive.png",
                                 height: 12,
@@ -270,7 +277,7 @@ class _DoctorDetailsState extends State<DoctorDetails> {
                                 width: 5,
                               ),
                               Image.asset(
-                                 double.parse(widget.rating) > 4
+                                double.parse(widget.rating) > 4
                                     ? "lib/assets/star_active.png"
                                     : "lib/assets/star_unactive.png",
                                 height: 12,
@@ -468,15 +475,18 @@ class _DoctorDetailsState extends State<DoctorDetails> {
           ),
           InkWell(
             onTap: () {
-              /* 
-                    print(doctorDetail.data.userId);
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => ChatScreen(
-                                doctorDetail.data.name,
-                                doctorDetail.data.userId.toString())));
-                  */
+              /* Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => ReviewScreen(widget.doct_uid))) */
+              showDialog(
+                  context: context,
+                  builder: (context) {
+                    return AddReviewDialog(
+                        callback: (int rating, String review) {
+                      // print('$rating $review');
+                    });
+                  });
             },
             child: Container(
               height: 50,
@@ -489,6 +499,7 @@ class _DoctorDetailsState extends State<DoctorDetails> {
               child: Image.asset("lib/assets/review.png"),
             ),
           ),
+          //Button Book Appointment
           Expanded(
             child: InkWell(
               onTap: () {
@@ -496,6 +507,7 @@ class _DoctorDetailsState extends State<DoctorDetails> {
                     context: context,
                     builder: (context) {
                       return BookAppointmentDialog(
+                        uid: widget.uid,
                         doct_uid: widget.doct_uid,
                         // scheduleModelList: widget.scheduleModelList,
                         personName: widget.personName,
@@ -529,4 +541,199 @@ class _DoctorDetailsState extends State<DoctorDetails> {
       ),
     );
   }
+
+/*   bottomButtons1() {
+    return Container(
+      color: Colors.white,
+      child: Row(
+        children: [
+          Expanded(
+            child: InkWell(
+              onTap: () {
+                // addReview();
+                print('Selected review: $selectedRating Review text: $review');
+              },
+              child: Container(
+                margin: EdgeInsets.fromLTRB(25, 5, 25, 0),
+                height: 50,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(25),
+                  color: MyColors.c3,
+                ),
+                child: Center(
+                  child: Text(
+                    SUBMIT,
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.w700,
+                        fontSize: 17),
+                  ),
+                ),
+              ),
+            ),
+          )
+        ],
+      ),
+    );
+  } */
+
+/*   AddReviewDialog() {
+    return Dialog(
+      child: Container(
+        height: MyScreenSize.mGetHeight(context, 43),
+        width: MyScreenSize.mGetWidth(context, 90),
+        margin: EdgeInsets.all(8),
+        padding: EdgeInsets.all(12),
+        decoration: BoxDecoration(
+      color: Colors.white,
+      borderRadius: BorderRadius.circular(10),
+        ),
+        child: Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      mainAxisAlignment: MainAxisAlignment.center,
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Text(
+          Add_A_REVIEW,
+          style: TextStyle(
+            fontWeight: FontWeight.w800,
+            fontSize: 20,
+          ),
+        ),
+        SizedBox(
+          height: 20,
+        ),
+        Text(
+          YOUR_RATING,
+          style: TextStyle(
+            fontWeight: FontWeight.w700,
+            fontSize: 18,
+          ),
+        ),
+        SizedBox(
+          height: 10,
+        ),
+        Row(
+          children: [
+            InkWell(
+              onTap: () {
+                setState(() {
+                  selectedRating = 1;
+                });
+              },
+              child: Image.asset(
+                selectedRating > 0
+                    ? "lib/assets/star_active.png"
+                    : "lib/assets/star_active.png",
+                height: 20,
+                width: 20,
+              ),
+            ),
+            SizedBox(
+              width: 8,
+            ),
+            InkWell(
+              onTap: () {
+                setState(() {
+                  selectedRating = 2;
+                });
+              },
+              child: Image.asset(
+                selectedRating > 1
+                    ? "lib/assets/star_active.png"
+                    : "lib/assets/star_unactive.png",
+                height: 20,
+                width: 20,
+              ),
+            ),
+            SizedBox(
+              width: 8,
+            ),
+            InkWell(
+              onTap: () {
+                setState(() {
+                  selectedRating = 3;
+                });
+              },
+              child: Image.asset(
+                selectedRating > 2
+                    ? "lib/assets/star_active.png"
+                    : "lib/assets/star_unactive.png",
+                height: 20,
+                width: 20,
+              ),
+            ),
+            SizedBox(
+              width: 8,
+            ),
+            InkWell(
+              onTap: () {
+                setState(() {
+                  selectedRating = 4;
+                });
+              },
+              child: Image.asset(
+                selectedRating > 3
+                    ? "lib/assets/star_active.png"
+                    : "lib/assets/star_unactive.png",
+                height: 20,
+                width: 20,
+              ),
+            ),
+            SizedBox(
+              width: 8,
+            ),
+            InkWell(
+              onTap: () {
+                setState(() {
+                  selectedRating = 5;
+                });
+              },
+              child: Image.asset(
+                selectedRating > 4
+                    ? "lib/assets/star_active.png"
+                    : "lib/assets/star_unactive.png",
+                height: 20,
+                width: 20,
+              ),
+            ),
+          ],
+        ),
+        SizedBox(
+          height: 20,
+        ),
+        Text(
+          YOUR_REVIEW,
+          style: TextStyle(fontWeight: FontWeight.w700, fontSize: 18),
+        ),
+        TextField(
+          style: TextStyle(color: Colors.grey, fontSize: 14),
+          decoration: InputDecoration(
+            hintText: "Your review here...",
+            contentPadding: EdgeInsets.zero,
+            border: UnderlineInputBorder(
+                borderSide:
+                    BorderSide(color: Colors.grey, width: 0.5)),
+            focusedBorder: UnderlineInputBorder(
+                borderSide: BorderSide(
+                    color: Colors.grey.shade500, width: 0.5)),
+            enabledBorder: UnderlineInputBorder(
+                borderSide: BorderSide(
+                    color: Colors.grey.shade500, width: 0.5)),
+          ),
+          onChanged: (val) {
+            setState(() {
+              review = val;
+            });
+          },
+        ),
+        SizedBox(
+          height: 24,
+        ),
+        bottomButtons1(),
+      ],
+        ),
+      ),
+    );
+  } */
 }

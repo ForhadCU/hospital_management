@@ -22,6 +22,41 @@ class ServicesFirestore {
   /*  static final DocumentReference adminDocRef =
       ServicesFirestore.collRefAdmin.doc(); */
 
+  static Future<Map<String, dynamic>> mGetUserInfo(String uid) async {
+    FirebaseFirestore db = FirebaseFirestore.instance;
+    QuerySnapshot<Map<String, dynamic>> querySnapshot =
+        await db.collection(ConstKeys.patientCollRef).get();
+    Map<String, dynamic> map = {};
+    String name = '';
+    String email = '';
+    String phone = '';
+    for (var element in querySnapshot.docs) {
+      if (element.get('userid') == uid) {
+        name = element.get('name');
+        email = element.get('email');
+        phone = element.get('phone');
+      }
+    }
+    return {'name': MyServices.mDecode(name), 'email': MyServices.mDecode(email), 'phone': phone};
+  }
+
+  static Future<void> mUpdatePatientData(
+      String uid, String name, String gmail, String phone) async {
+    FirebaseFirestore db = FirebaseFirestore.instance;
+
+    QuerySnapshot<Map<String, dynamic>> querySnapshot =
+        await db.collection('PATIENTS').get();
+
+    for (var element in querySnapshot.docs) {
+      if (element.get('userid') == uid) {
+        await db
+            .collection('PATIENTS')
+            .doc(element.id)
+            .update({'email': gmail, 'name': name, 'phone': phone});
+      }
+    }
+  }
+
   static Future<String> mGetUserType(String userid) async {
     FirebaseFirestore db = FirebaseFirestore.instance;
     //check only USER collection
@@ -139,7 +174,7 @@ class ServicesFirestore {
         acceptStatus: 'Confirm',
         notifId: '');
     String? doc_id;
-    //Add patient Appointment
+    //Add doctor Appointment
     await db
         .collection(ConstKeys.doctorCollRef)
         .doc(doctUid)
@@ -209,17 +244,25 @@ class ServicesFirestore {
         acceptStatus: 'Pending',
         notifId: '');
     String? patientAppointmentId;
+    String? docId;
     //Add patient Appointment
+    QuerySnapshot<Map<String, dynamic>> querySnapshot =
+        await db.collection("PATIENTS").get();
+    for (var element in querySnapshot.docs) {
+      if (element.get('userid') == myUid) {
+        docId = element.id;
+      }
+    }
     await db
         .collection(ConstKeys.patientCollRef)
-        .doc(ConstKeys.patientDocId)
+        .doc(docId)
         .collection(ConstKeys.appointments)
         .add(model1.toMap())
         .then((value) {
       patientAppointmentId = value.id;
       return db
           .collection(ConstKeys.patientCollRef)
-          .doc(ConstKeys.patientDocId)
+          .doc(docId)
           .collection(ConstKeys.appointments)
           .doc(value.id)
           .update({'patientAppnointmentId': value.id});

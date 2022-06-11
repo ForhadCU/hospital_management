@@ -6,11 +6,11 @@ import 'package:my_hospital_app/controller/utils/util.custom_text.dart';
 import 'package:my_hospital_app/model/consts/const.colors.dart';
 
 class DoctorBanner extends StatelessWidget {
-  final String name;
-  final String category;
-  final String rating;
-  final String schFrom;
-  final String schTo;
+  final String? name;
+  final String? category;
+  final String? rating;
+  final String? schFrom;
+  final String? schTo;
   final Function callback;
   const DoctorBanner(
       {super.key,
@@ -69,14 +69,14 @@ class DoctorBanner extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         CustomText(
-                          text: name,
+                          text:  name == null ? "Dr. Nullendro Shen": name!,
                           fontWeight: FontWeight.bold,
                         ),
                         SizedBox(
                           height: 2,
                         ),
                         CustomText(
-                          text: category,
+                          text:  category == null ? "Dentist": category!,
                           fontWeight: FontWeight.normal,
                         ),
                         SizedBox(

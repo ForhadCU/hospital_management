@@ -4,7 +4,6 @@ import 'package:my_hospital_app/model/consts/const.colors.dart';
 import 'package:my_hospital_app/model/data_model/model.review.dart';
 import 'package:my_hospital_app/view/screens/doctor%20profile/widget/placeholder.dart';
 
-
 class ReviewScreen extends StatefulWidget {
   final String doctorId;
   ReviewScreen(this.doctorId);
@@ -19,14 +18,12 @@ class _ReviewScreenState extends State<ReviewScreen> {
   String review = "";
   int userId = 1;
   bool showReviewDialog = false;
- late ReviewClass reviewClass;
-  bool isLoaded = false;
+  ReviewClass? reviewClass;
+  bool isLoaded = true;
 
   @override
   void initState() {
     super.initState();
-   
-
   }
 
   @override
@@ -35,10 +32,10 @@ class _ReviewScreenState extends State<ReviewScreen> {
       child: Stack(
         children: [
           Scaffold(
-            backgroundColor: MyColors.c3,
+            backgroundColor: Colors.white,
             appBar: AppBar(
               leading: Container(),
-              backgroundColor: Colors.white,
+              backgroundColor: MyColors.c3,
               flexibleSpace: header(),
             ),
             body: !isLoaded
@@ -49,7 +46,7 @@ class _ReviewScreenState extends State<ReviewScreen> {
                   )
                 : reviewsList(),
             floatingActionButton: FloatingActionButton(
-              backgroundColor: MyColors.c3,
+              backgroundColor: MyColors.c2,
               child: Icon(
                 Icons.add,
                 color: Colors.white,
@@ -117,7 +114,9 @@ class _ReviewScreenState extends State<ReviewScreen> {
                 ListView.builder(
                   shrinkWrap: true,
                   physics: ClampingScrollPhysics(),
-                  itemCount: reviewClass == null ? 0 :/*  reviewClass.data.length */ 4,
+                  itemCount: reviewClass == null
+                      ? 0
+                      : /*  reviewClass.data.length */ 4,
                   itemBuilder: (context, index) {
                     return reviewCard(index);
                   },
@@ -142,8 +141,12 @@ class _ReviewScreenState extends State<ReviewScreen> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           ClipRRect(
-            borderRadius: BorderRadius.circular(30),
-            child: Image.asset('lib/assets/doc1.png', width: 60, height: 60,) /* CachedNetworkImage(
+              borderRadius: BorderRadius.circular(30),
+              child: Image.asset(
+                'lib/assets/doc1.png',
+                width: 60,
+                height: 60,
+              ) /* CachedNetworkImage(
               height: 60,
               width: 60,
               fit: BoxFit.cover,
@@ -165,7 +168,7 @@ class _ReviewScreenState extends State<ReviewScreen> {
                 ),
               ),
             ) */
-          ),
+              ),
           SizedBox(
             width: 15,
           ),
@@ -186,9 +189,11 @@ class _ReviewScreenState extends State<ReviewScreen> {
                   Row(
                     children: [
                       Image.asset(
-                        double.parse(/* reviewClass.data[index].ratting */ '4.3') > 0.0
-                            ? "assets/doctordetails/star_active.png"
-                            : "assets/doctordetails/star_unactive.png",
+                        double.parse(
+                                    /* reviewClass.data[index].ratting */ '4.3') >
+                                0.0
+                            ? "lib/assets/star_active.png"
+                            : "lib/assets/star_unactive.png",
                         height: 15,
                         width: 15,
                       ),
@@ -196,9 +201,11 @@ class _ReviewScreenState extends State<ReviewScreen> {
                         width: 5,
                       ),
                       Image.asset(
-                        double.parse(/* reviewClass.data[index].ratting */ '4.3') > 1.0
-                            ? "assets/doctordetails/star_active.png"
-                            : "assets/doctordetails/star_unactive.png",
+                        double.parse(
+                                    /* reviewClass.data[index].ratting */ '4.3') >
+                                1.0
+                            ? "lib/assets/star_active.png"
+                            : "lib/assets/star_unactive.png",
                         height: 15,
                         width: 15,
                       ),
@@ -206,9 +213,11 @@ class _ReviewScreenState extends State<ReviewScreen> {
                         width: 5,
                       ),
                       Image.asset(
-                        double.parse(/* reviewClass.data[index].ratting */ '4.3') > 2.0
-                            ? "assets/doctordetails/star_active.png"
-                            : "assets/doctordetails/star_unactive.png",
+                        double.parse(
+                                    /* reviewClass.data[index].ratting */ '4.3') >
+                                2.0
+                            ? "lib/assets/star_active.png"
+                            : "lib/assets/star_unactive.png",
                         height: 15,
                         width: 15,
                       ),
@@ -216,9 +225,11 @@ class _ReviewScreenState extends State<ReviewScreen> {
                         width: 5,
                       ),
                       Image.asset(
-                        double.parse(/* reviewClass.data[index].ratting */ '4.3') > 3.0
-                            ? "assets/doctordetails/star_active.png"
-                            : "assets/doctordetails/star_unactive.png",
+                        double.parse(
+                                    /* reviewClass.data[index].ratting */ '4.3') >
+                                3.0
+                            ? "lib/assets/star_active.png"
+                            : "lib/assets/star_unactive.png",
                         height: 15,
                         width: 15,
                       ),
@@ -226,9 +237,11 @@ class _ReviewScreenState extends State<ReviewScreen> {
                         width: 5,
                       ),
                       Image.asset(
-                        double.parse(/* reviewClass.data[index].ratting */ '4.3') > 4.0
-                            ? "assets/doctordetails/star_active.png"
-                            : "assets/doctordetails/star_unactive.png",
+                        double.parse(
+                                    /* reviewClass.data[index].ratting */ '4.3') >
+                                4.0
+                            ? "lib/assets/star_active.png"
+                            : "lib/assets/star_unactive.png",
                         height: 15,
                         width: 15,
                       ),
@@ -319,8 +332,8 @@ class _ReviewScreenState extends State<ReviewScreen> {
                       },
                       child: Image.asset(
                         selectedRating > 0
-                            ? "assets/doctordetails/star_active.png"
-                            : "assets/doctordetails/star_unactive.png",
+                            ? "lib/assets/star_active.png"
+                            : "lib/assets/star_active.png",
                         height: 20,
                         width: 20,
                       ),
@@ -336,8 +349,8 @@ class _ReviewScreenState extends State<ReviewScreen> {
                       },
                       child: Image.asset(
                         selectedRating > 1
-                            ? "assets/doctordetails/star_active.png"
-                            : "assets/doctordetails/star_unactive.png",
+                            ? "lib/assets/star_active.png"
+                            : "lib/assets/star_unactive.png",
                         height: 20,
                         width: 20,
                       ),
@@ -353,8 +366,8 @@ class _ReviewScreenState extends State<ReviewScreen> {
                       },
                       child: Image.asset(
                         selectedRating > 2
-                            ? "assets/doctordetails/star_active.png"
-                            : "assets/doctordetails/star_unactive.png",
+                            ? "lib/assets/star_active.png"
+                            : "lib/assets/star_unactive.png",
                         height: 20,
                         width: 20,
                       ),
@@ -370,8 +383,8 @@ class _ReviewScreenState extends State<ReviewScreen> {
                       },
                       child: Image.asset(
                         selectedRating > 3
-                            ? "assets/doctordetails/star_active.png"
-                            : "assets/doctordetails/star_unactive.png",
+                            ? "lib/assets/star_active.png"
+                            : "lib/assets/star_unactive.png",
                         height: 20,
                         width: 20,
                       ),
@@ -387,8 +400,8 @@ class _ReviewScreenState extends State<ReviewScreen> {
                       },
                       child: Image.asset(
                         selectedRating > 4
-                            ? "assets/doctordetails/star_active.png"
-                            : "assets/doctordetails/star_unactive.png",
+                            ? "lib/assets/star_active.png"
+                            : "lib/assets/star_unactive.png",
                         height: 20,
                         width: 20,
                       ),
@@ -443,6 +456,7 @@ class _ReviewScreenState extends State<ReviewScreen> {
             child: InkWell(
               onTap: () {
                 // addReview();
+                print('Selected review: $selectedRating Review text: $review');
               },
               child: Container(
                 margin: EdgeInsets.fromLTRB(25, 5, 25, 0),
@@ -456,7 +470,8 @@ class _ReviewScreenState extends State<ReviewScreen> {
                     SUBMIT,
                     style: TextStyle(
                         color: Colors.white,
-                        fontWeight: FontWeight.w700, fontSize: 17),
+                        fontWeight: FontWeight.w700,
+                        fontSize: 17),
                   ),
                 ),
               ),
@@ -466,10 +481,6 @@ class _ReviewScreenState extends State<ReviewScreen> {
       ),
     );
   }
-
-
-
-
 
   errorDialog(message) {
     return showDialog(

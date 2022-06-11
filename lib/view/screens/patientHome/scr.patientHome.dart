@@ -1,17 +1,15 @@
-// ignore_for_file: avoid_unnecessary_containers, prefer_const_constructors, prefer_const_literals_to_create_immutables
+// ignore_for_file: avoid_unnecessary_containers, prefer_const_constructors, prefer_const_literals_to_create_immutables, prefer_interpolation_to_compose_strings
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:my_hospital_app/controller/firebaseController/services.firestore.dart';
-import 'package:my_hospital_app/controller/services/service.my_service.dart';
 import 'package:my_hospital_app/controller/utils/util.custom_statusbar.dart';
 import 'package:my_hospital_app/controller/utils/util.custom_text.dart';
 import 'package:my_hospital_app/controller/utils/util.my_scr_size.dart';
 import 'package:my_hospital_app/model/consts/const.colors.dart';
-import 'package:my_hospital_app/view/screens/adminHome/screen/appointment/scr.appointment.dart';
 import 'package:my_hospital_app/view/screens/login/scr.login.dart';
 import 'package:my_hospital_app/view/screens/patientHome/screens/addAppointments/scr.add_appointments.dart';
+import 'package:my_hospital_app/view/screens/patientHome/screens/profile.dart';
 import 'package:my_hospital_app/view/screens/patientHome/widgets/iconButtons.dart';
 import 'package:my_hospital_app/view/screens/patientHome/widgets/user_banner.dart';
 
@@ -25,11 +23,26 @@ class PatientHome extends StatefulWidget {
 
 class _PatientHomeState extends State<PatientHome> {
   late FirebaseAuth mAuth;
+  late String gmail;
+  late String name;
+  late String phone;
+
   @override
   void initState() {
     super.initState();
     CustomStatusBar.mGetWhiteStatusbar();
     mAuth = FirebaseAuth.instance;
+    print('uid: ' + widget.uid);
+    ServicesFirestore.mGetUserInfo(widget.uid).then((value) {
+      setState(() {
+        gmail = value['email'];
+        name = value['name'];
+        phone = value['phone'];
+      });
+    });
+    /*    gmail = 'patient@gmail.com';
+    name = 'Mr. Tester';
+    name = '0187892728283'; */
   }
 
   @override
@@ -64,7 +77,12 @@ class _PatientHomeState extends State<PatientHome> {
               InkWell(
                   onTap: () {
                     // print('object');
-                    ServicesFirestore.mUpdateDoctorCollection();
+                    // ServicesFirestore.mUpdateDoctorCollection();
+                    DateTime date =
+                        DateTime.fromMillisecondsSinceEpoch(1654882887995);
+                    DateTime date2 = DateTime.now();
+                    
+                    print(date);
                   },
                   child: UserBanner.userBanner(name: "Patient")),
             ],
@@ -78,16 +96,38 @@ class _PatientHomeState extends State<PatientHome> {
             mainAxisSize: MainAxisSize.min,
             children: [
               //profile and records icon
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  IconAndText.iconAndText(
-                      imageUrl: 'lib/assets/ic_person.png',
-                      title: "My Profile"),
-                  IconAndText.iconAndText(
-                      imageUrl: 'lib/assets/ic_history.png',
-                      title: "My Records"),
-                ],
+              InkWell(
+                onTap: () {
+                  /* showDialog(
+                      context: context,
+                      builder: (context) {
+                        return MyProfileDialog(
+                          gmail: gmail,
+                          personName: name,
+                          mobile: phone,
+                        );
+                      }); */
+                  Navigator.of(context)
+                      .push(MaterialPageRoute(builder: (context) {
+                    return PatientProfileScreen(
+                      uid: widget.uid,
+                      name: name,
+                      gmail: gmail,
+                      phone: phone,
+                    );
+                  }));
+                },
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    IconAndText.iconAndText(
+                        imageUrl: 'lib/assets/ic_person.png',
+                        title: "My Profile"),
+                    IconAndText.iconAndText(
+                        imageUrl: 'lib/assets/ic_history.png',
+                        title: "My Records"),
+                  ],
+                ),
               ),
               SizedBox(
                 height: 14,
@@ -127,7 +167,8 @@ class _PatientHomeState extends State<PatientHome> {
                   Expanded(
                     child: InkWell(
                       onTap: () => Navigator.of(context).push(MaterialPageRoute(
-                          builder: (context) => AddAppointments())),
+                          builder: (context) =>
+                              AddAppointments(uid: widget.uid))),
                       child: IconAndText.iconAndText(
                           imageUrl: 'lib/assets/ic_add_appointment.png',
                           title: "Add Appointment"),

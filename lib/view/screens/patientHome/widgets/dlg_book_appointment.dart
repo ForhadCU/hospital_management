@@ -6,7 +6,6 @@ import 'package:my_hospital_app/controller/services/service.my_service.dart';
 import 'package:my_hospital_app/controller/utils/util.custom_text.dart';
 import 'package:my_hospital_app/controller/utils/util.my_scr_size.dart';
 import 'package:my_hospital_app/model/consts/const.colors.dart';
-import 'package:my_hospital_app/model/consts/keywords.dart';
 import 'package:my_hospital_app/model/data_model/model.schedule.dart';
 import 'package:my_hospital_app/view/screens/patientHome/widgets/sche_view.dart';
 import 'package:my_hospital_app/view/widgets/dot_blink_loader.dart';
@@ -19,9 +18,12 @@ class BookAppointmentDialog extends StatefulWidget {
   final String consultationFee;
   final String category;
   final String doct_uid;
+  final String uid; 
+
 
   const BookAppointmentDialog(
       {super.key,
+      required this.uid,
       required this.doct_uid,
       required this.category,
       required this.consultationFee,
@@ -47,7 +49,8 @@ class _BookAppointmentDialogState extends State<BookAppointmentDialog> {
   String sentDate = '';
   String sentTime = '';
   String visitDate = '';
-  String myUid = ConstKeys.patientDocId;
+  // String myUid = ConstKeys.patientDocId;
+  String myUid = '';
 
   @override
   void initState() {
@@ -55,6 +58,7 @@ class _BookAppointmentDialogState extends State<BookAppointmentDialog> {
     isGotSchedule = false;
     scheduleModelList = [];
     isRequestingAppointment = false;
+    myUid = widget.uid;
     //call getSche method,
     ServicesFirestore.mFetchSchedules(widget.doct_uid, startDateStr)
         .then((value) {
@@ -354,15 +358,7 @@ class _BookAppointmentDialogState extends State<BookAppointmentDialog> {
                                 ? Row(
                                     children: [
                                       DotBlickLoader(),
-                                      /*  CustomText(
-                                          text: ">>",
-                                          fontWeight: FontWeight.w400,
-                                          fontcolor: Color.fromARGB(
-                                            255,
-                                            156,
-                                            99,
-                                            255,
-                                          )) */
+                                      
                                     ],
                                   )
                                 : Container(

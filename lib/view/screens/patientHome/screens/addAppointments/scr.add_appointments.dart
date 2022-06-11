@@ -13,7 +13,8 @@ import 'package:my_hospital_app/view/screens/patientHome/widgets/doctor_banner.d
 import 'package:page_transition/page_transition.dart';
 
 class AddAppointments extends StatefulWidget {
-  const AddAppointments({super.key});
+  final String uid;
+  const AddAppointments({super.key, required this.uid});
 
   @override
   State<AddAppointments> createState() => _AddAppointmentsState();
@@ -156,6 +157,7 @@ class _AddAppointmentsState extends State<AddAppointments> {
                                         doctor.scheduleModelList![1].from); */
                                     Navigator.of(context).push(PageTransition(
                                         child: DoctorDetails(
+                                          uid: widget.uid,
                                           /* scheduleModelList:
                                               doctor.scheduleModelList!, */
                                           doct_uid: doctor.userid!,
@@ -168,11 +170,11 @@ class _AddAppointmentsState extends State<AddAppointments> {
                                         ),
                                         type: PageTransitionType.bottomToTop));
                                   },
-                                  name: doctor.name!,
-                                  category: doctor.category!,
-                                  rating: doctor.rating!,
-                                  schFrom: doctor.schedule_start!,
-                                  schTo: doctor.schedule_end!);
+                                  name: doctor.name,
+                                  category: doctor.category,
+                                  rating: doctor.rating,
+                                  schFrom: doctor.schedule_start,
+                                  schTo: doctor.schedule_end);
                             }),
                   )
                 ],
