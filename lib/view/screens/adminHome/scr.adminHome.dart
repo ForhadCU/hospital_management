@@ -12,6 +12,7 @@ import 'package:my_hospital_app/controller/utils/util.my_scr_size.dart';
 import 'package:my_hospital_app/model/consts/const.colors.dart';
 import 'package:my_hospital_app/model/consts/keywords.dart';
 import 'package:my_hospital_app/view/screens/adminHome/screen/appointment/scr.appointment.dart';
+import 'package:my_hospital_app/view/screens/adminHome/screen/history_graph.dart';
 import 'package:my_hospital_app/view/screens/adminHome/screen/notifiaction/scr.notification.dart';
 import 'package:my_hospital_app/view/screens/adminHome/screen/notifiaction/widget/noti_item.dart';
 import 'package:my_hospital_app/view/screens/login/scr.login.dart';
@@ -41,8 +42,6 @@ class _AdminHomeState extends State<AdminHome> {
         statusBarColor: Colors.white));
 
     mAuth = FirebaseAuth.instance;
-
-
 
     FirebaseFirestore.instance
         .collection(ConstKeys.adminCollRef)
@@ -119,8 +118,7 @@ class _AdminHomeState extends State<AdminHome> {
                         imageUrl: 'lib/assets/ic_person.png',
                         title: "My Profile"),
                   ),
-
-                    ShakeAnimatedWidget(
+                  ShakeAnimatedWidget(
                     enabled: counter > 0 ? true : false,
                     duration: Duration(milliseconds: 2000),
                     shakeAngle: Rotation.deg(z: 15),
@@ -148,13 +146,12 @@ class _AdminHomeState extends State<AdminHome> {
                       ),
                     ),
                   ),
-               
                 ],
               ),
               SizedBox(
                 height: 14,
               ),
-             /*  Divider(
+              /*  Divider(
                 height: 1,
                 thickness: 2,
                 color: MyColors.app2,
@@ -173,7 +170,7 @@ class _AdminHomeState extends State<AdminHome> {
                 ],
               ),
 
-             /*  Divider(
+              /*  Divider(
                 height: 1,
                 thickness: 2,
                 color: MyColors.app2,
@@ -193,20 +190,27 @@ class _AdminHomeState extends State<AdminHome> {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => AdminAppointmentScreen()));
+                                builder: (context) =>
+                                    AdminAppointmentScreen()));
                       },
                       child: IconAndText.iconAndText(
                           imageUrl: 'lib/assets/appointments.png',
                           title: "Appointments"),
                     ),
                   ),
-                
-   IconAndText.iconAndText(
-                      imageUrl: 'lib/assets/ic_history.png',
-                      title: "Medical Records"),
-
-
-
+                  Expanded(
+                    child: InkWell(
+                      onTap: () {
+                        Navigator.of(context)
+                            .push(MaterialPageRoute(builder: (context) {
+                          return HistoryGraph();
+                        }));
+                      },
+                      child: IconAndText.iconAndText(
+                          imageUrl: 'lib/assets/ic_history.png',
+                          title: "Medical Records"),
+                    ),
+                  ),
 
                   /*  Expanded(
                     child: InkWell(

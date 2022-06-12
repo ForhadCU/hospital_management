@@ -116,7 +116,7 @@ class _LauncherSlidesScreenState extends State<LauncherSlidesScreen> {
                                 primary: MyColors.c2,
                               ),
                               child: Text(
-                                MyData.previous,
+                                MaaData.previous,
                                 style: TextStyle(
                                     color: MyColors.textOnPrimary,
                                     fontWeight: FontWeight.w600),
@@ -145,7 +145,7 @@ class _LauncherSlidesScreenState extends State<LauncherSlidesScreen> {
                         style: ElevatedButton.styleFrom(
                             elevation: 0, primary: MyColors.c2),
                         child: Text(
-                          slideIndex == 3 ? MyData.save : MyData.next,
+                          slideIndex == 3 ? MaaData.save : MaaData.next,
                           style: const TextStyle(
                               color: MyColors.textOnPrimary,
                               fontWeight: FontWeight.w600),

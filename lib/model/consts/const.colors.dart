@@ -56,6 +56,23 @@ class MyColors {
     Color(0xff66A266),
     Color(0xff4C924C),
   ];
+
+  static const Color col = Color(0xff607D8B);
+  static const Color ashe = Color(0xffcccccc);
+
+
+  static const Color pink4 = Color(0xffFF4081);
+  static const Color pink2 = Color(0xffad1457);
+  static const Color pink1 = Color(0xff880e4f);
+  static const Color pink3 = Color(0xffEF4081);
+  static const Color pink5 = Color(0xffE984B0);
+  static const Color pink6 = Color(0xffF5B2D1);
+  static const Color app7 = Color(0xffF5B2D1);
+
+  static const Color sympBlock1 = Color(0xff0d47a1);
+  static const Color sympBlock2 = Color(0xffffea00);
+  static const Color sympBlock3 = Color(0xffCC0000);
+
   static const List<Color> arrayDotActive = [
     dotLightScreen1,
     dotLightScreen1,
@@ -68,6 +85,8 @@ class MyColors {
     dotDarkScreen1,
     dotDarkScreen1
   ];
-  static const Color col = Color(0xff607D8B);
-  static const Color ashe = Color(0xffcccccc);
+
+
+
+  
 }

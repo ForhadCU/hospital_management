@@ -14,3 +14,4 @@ shared_preferences_linux=/home/forhad/snap/flutter/common/flutter/.pub-cache/hos
 shared_preferences_macos=/home/forhad/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/shared_preferences_macos-2.0.4/
 shared_preferences_web=/home/forhad/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/shared_preferences_web-2.0.4/
 shared_preferences_windows=/home/forhad/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/shared_preferences_windows-2.1.1/
+sqflite=/home/forhad/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/sqflite-2.0.2+1/

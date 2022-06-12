@@ -22,9 +22,8 @@ class DoctorDetails extends StatefulWidget {
   // final List<ScheduleModel> scheduleModelList;
 
   DoctorDetails(
-      {
-        required this.uid,
-        required this.doct_uid,
+      {required this.uid,
+      required this.doct_uid,
       required this.category,
       required this.consultationFee,
       required this.personName,
@@ -390,7 +389,7 @@ class _DoctorDetailsState extends State<DoctorDetails> {
                 childAspectRatio: 3,
                 mainAxisSpacing: 5),
             // itemCount: doctorDetail.data.timeTabledata.length,
-            itemCount: MyData.weekList.length,
+            itemCount: MaaData.weekList.length,
             itemBuilder: (context, index) {
               return Row(
                 children: [
@@ -415,7 +414,7 @@ class _DoctorDetailsState extends State<DoctorDetails> {
                       Text(
                         /*  weekDaysList[
                             doctorDetail.data.timeTabledata[index].day - 1] */
-                        MyData.weekList[index],
+                        MaaData.weekList[index],
                         style: TextStyle(
                             color: Color.fromARGB(255, 10, 67, 114),
                             fontSize: 12,

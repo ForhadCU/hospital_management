@@ -59,7 +59,7 @@ class _SlideTile3State extends State<SlideTile3> {
             height: 12,
           ),
           const CustomText(
-            text: MyData.glance,
+            text: MaaData.glance,
             fontcolor: MyColors.textOnPrimary,
             fontsize: 28,
             fontWeight: FontWeight.w600,
@@ -72,7 +72,7 @@ class _SlideTile3State extends State<SlideTile3> {
             children: [
               CustomText(
                 text:
-                    "${MyData.running} ${runingWeek.toString()} ${MyData.week} ${runingDay.toString()} ${MyData.day}",
+                    "${MaaData.running} ${runingWeek.toString()} ${MaaData.week} ${runingDay.toString()} ${MaaData.day}",
                 fontcolor: MyColors.textOnPrimary,
                 fontWeight: FontWeight.w400,
                 fontsize: 18,
@@ -89,7 +89,7 @@ class _SlideTile3State extends State<SlideTile3> {
             children: [
               CustomText(
                 text:
-                    "${MyData.remaining} ${remainingWeek.toString()} ${MyData.week} ${remainingDay.toString()} ${MyData.day} ( ${totalDay.toString()} ${MyData.day} )",
+                    "${MaaData.remaining} ${remainingWeek.toString()} ${MaaData.week} ${remainingDay.toString()} ${MaaData.day} ( ${totalDay.toString()} ${MaaData.day} )",
                 fontcolor: MyColors.textOnPrimary,
                 fontWeight: FontWeight.w400,
                 fontsize: 18,

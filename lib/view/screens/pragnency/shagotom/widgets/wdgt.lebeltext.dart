@@ -21,7 +21,7 @@ class LebelText extends StatelessWidget {
       height: MyScreenSize.mGetHeight(context, 4),
       width: MyScreenSize.mGetWidth(context, 100),
       child: const CustomText(
-        text: MyData.text1,
+        text: MaaData.text1,
         fontcolor: MyColors.textOnPrimary,
         fontsize: 15,
         fontWeight: FontWeight.bold,

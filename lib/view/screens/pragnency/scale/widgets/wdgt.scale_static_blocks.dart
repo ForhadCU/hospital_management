@@ -44,7 +44,7 @@ class ScaleStaticBlocks extends StatelessWidget {
                       child: Container(
                         alignment: Alignment.center,
                         child: const CustomText(
-                          text: MyData.first_timestar,
+                          text: MaaData.first_timestar,
                           fontcolor: MyColors.textOnPrimary,
                           fontsize: 14.5,
                           fontWeight: FontWeight.bold,
@@ -56,7 +56,7 @@ class ScaleStaticBlocks extends StatelessWidget {
                       child: Container(
                         alignment: Alignment.center,
                         child: const CustomText(
-                          text: MyData.second_timestar,
+                          text: MaaData.second_timestar,
                           fontcolor: MyColors.textOnPrimary,
                           fontsize: 14.5,
                           fontWeight: FontWeight.bold,
@@ -68,7 +68,7 @@ class ScaleStaticBlocks extends StatelessWidget {
                       child: Container(
                         alignment: Alignment.center,
                         child: const CustomText(
-                          text: MyData.third_timestar,
+                          text: MaaData.third_timestar,
                           fontcolor: MyColors.textOnPrimary,
                           fontsize: 14.5,
                           fontWeight: FontWeight.bold,

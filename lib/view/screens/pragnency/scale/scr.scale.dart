@@ -166,10 +166,10 @@ class _ScalScreenState extends State<ScalScreen> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               CustomText(
-                                text: '${MyData.running} ${MyServices.getBangNumFormat(widget.runningWeeks + 1)}' +
-                                    ' ${MyData.week} (${MyServices.getBangNumFormat(widget.runningMonths)} ${MyData.month}),' +
+                                text: '${MaaData.running} ${MyServices.getBangNumFormat(widget.runningWeeks + 1)}' +
+                                    ' ${MaaData.week} (${MyServices.getBangNumFormat(widget.runningMonths)} ${MaaData.month}),' +
                                     ' ${MyServices.getBangNumFormat(MyServices.getTimestarNum(widget.runningWeeks + 1).toInt())}' +
-                                    ' ${MyData.valuelist1[1]}',
+                                    ' ${MaaData.valuelist1[1]}',
                                 fontcolor: MyColors.app1,
                                 fontsize: 15,
                                 fontWeight: FontWeight.w500,

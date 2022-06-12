@@ -87,7 +87,7 @@ class _AddAppointmentsState extends State<AddAppointments> {
                 // shrinkWrap: true,
                 scrollDirection: Axis.horizontal,
                 // itemCount: doctorsModelList.length,
-                itemCount: MyData.categoryList.length,
+                itemCount: MaaData.categoryList.length,
                 itemBuilder: (context, index) {
                   return CategoryView(
                       callback: (String catName) {
@@ -99,7 +99,7 @@ class _AddAppointmentsState extends State<AddAppointments> {
                           });
                         });
                       },
-                      catName: MyData.categoryList[index]);
+                      catName: MaaData.categoryList[index]);
                 },
               ),
             ),

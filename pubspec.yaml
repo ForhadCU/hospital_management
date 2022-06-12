@@ -49,6 +49,11 @@ dependencies:
   animated_widgets: ^1.1.0
   animations: ^2.0.3
   # animations: ^2.0.3
+  numberpicker: ^2.1.1
+  syncfusion_flutter_calendar: ^20.1.57
+  sqflite: ^2.0.2+1
+  path: ^1.8.1
+
 
 
 dev_dependencies:

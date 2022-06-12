@@ -22,7 +22,7 @@ class SlideTile0 extends StatelessWidget {
           const SizedBox(
             height: 28,
           ),
-          const Text(MyData.welcome,
+          const Text(MaaData.welcome,
               textAlign: TextAlign.center,
               style: TextStyle(
                   fontWeight: FontWeight.w700,

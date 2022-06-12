@@ -76,7 +76,7 @@ class _ShaptahikPoribortonState extends State<ShaptahikPoriborton> {
                     children: const [
                       //title
                       CustomText(
-                        text: MyData.weekly_change,
+                        text: MaaData.weekly_change,
                         fontcolor: MyColors.c2,
                         fontWeight: FontWeight.w600,
                         fontsize: 20,
@@ -91,7 +91,7 @@ class _ShaptahikPoribortonState extends State<ShaptahikPoriborton> {
                       //subTitle
                       CustomText(
                         text:
-                            '${widget.runningWeeks.toString()} ${MyData.week} ${widget.runningDays.toString()} ${MyData.day}',
+                            '${widget.runningWeeks.toString()} ${MaaData.week} ${widget.runningDays.toString()} ${MaaData.day}',
                         fontsize: 15,
                         fontWeight: FontWeight.bold,
                         fontcolor: Colors.black54,
@@ -198,7 +198,7 @@ class _ShaptahikPoribortonState extends State<ShaptahikPoriborton> {
           ? postImgUrl = ''
           : _mGenerateImgUrl(widget.runningWeeks + 1);
 
-      shortDesc = MyData.shortDescriptionData.elementAt(widget.runningWeeks);
+      shortDesc = MaaData.shortDescriptionData.elementAt(widget.runningWeeks);
     } else if (widget.runningWeeks <= 41 &&
         widget.runningWeeks > 0 &&
         widget.totalRunningDays % 7 == 0) {
@@ -210,12 +210,12 @@ class _ShaptahikPoribortonState extends State<ShaptahikPoriborton> {
         postImgUrl = '';
       }
       shortDesc =
-          MyData.shortDescriptionData.elementAt(widget.runningWeeks - 1);
+          MaaData.shortDescriptionData.elementAt(widget.runningWeeks - 1);
     } else if (widget.runningWeeks <= 40) {
-      shortDesc = MyData.shortDescriptionData.elementAt(widget.runningWeeks);
+      shortDesc = MaaData.shortDescriptionData.elementAt(widget.runningWeeks);
     } else {
-      shortDesc = MyData.shortDescriptionData
-          .elementAt(MyData.shortDescriptionData.length - 1);
+      shortDesc = MaaData.shortDescriptionData
+          .elementAt(MaaData.shortDescriptionData.length - 1);
     }
   }
 
